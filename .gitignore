@@ -2,3 +2,4 @@
 *.swo
 protected/config/main.php
 protected/runtime
+assets
