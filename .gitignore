@@ -1,0 +1,4 @@
+*.swp
+*.swo
+protected/config/main.php
+protected/config/runtime
