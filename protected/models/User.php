@@ -129,6 +129,20 @@ class User extends CActiveRecord
 		return isset($status[$fl]) ? $status[$fl] : '-';	
 	}
 
+	/*
+	* Autentikasi data pengguna
+	*/
+	public function authenticate($pwd) 
+	{
+		if($this->status_pengguna == 1) {
+			if($this->sandi == $this->encrypt($pwd)) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.

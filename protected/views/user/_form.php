@@ -61,7 +61,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'sandi'); ?>
-		<?php echo $form->textField($model,'sandi',array('size'=>20,'maxlength'=>20, 'value'=>"")); ?>
+		<?php echo $form->passwordField($model,'sandi',array('size'=>20,'maxlength'=>20, 'value'=>"")); ?>
 		<?php echo $form->error($model,'sandi'); ?>
 	</div>
 	

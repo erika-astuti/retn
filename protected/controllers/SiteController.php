@@ -29,7 +29,13 @@ class SiteController extends Controller
 	{
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
-		$this->render('index');
+		if(Yii::app()->user->isGuest) {
+			$model = new LoginForm;
+		} else {
+			$model = false;
+		}
+
+		$this->render('index', array('model'=>$model));
 	}
 
 	/**
