@@ -54,7 +54,7 @@ body
 
 #mainmenu ul
 {
-	padding:6px 20px 5px 20px;
+	padding:7px 20px 5px 20px;
 	margin:0px;
 }
 
@@ -165,6 +165,22 @@ div.search-form
 	border-left: 5px solid #6FACCF;
 }
 
+.portlet-decoration-bg
+{
+	padding: 4px 8px;
+	background:white url(bg.gif) repeat-x left top;
+}
+
+
+.portlet-title-bg
+{
+	font-size: 12px;
+	font-weight: bold;
+	padding: 0;
+	margin: 0;
+	color: #ffffff;
+}
+
 .portlet-title
 {
 	font-size: 12px;
@@ -180,6 +196,17 @@ div.search-form
 	margin: 0 0 15px 0;
 	padding: 5px 8px;
 	background:#EFFDFF;
+}
+
+.portlet-content-clear
+{
+	font-size:0.9em;
+	margin: 0 0 15px 0;
+	padding: 5px 8px;
+	background:#FFFFFF;
+	border: 1px solid #6FACCF;
+	min-height: 6em;
+
 }
 
 .portlet-content ul
@@ -226,4 +253,8 @@ div.search-form
 .operations li a:hover
 {
 	background: #80CFFF;
+}
+
+.menu-spacer {
+	margin-top:5px;
 }

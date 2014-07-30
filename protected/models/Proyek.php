@@ -64,7 +64,7 @@ class Proyek extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'detailProyeks' => array(self::HAS_MANY, 'DetailProyek', 'id_proyek'),
-			'idPelanggan' => array(self::BELONGS_TO, 'Pelanggan', 'id_pelanggan'),
+			'pelanggan' => array(self::BELONGS_TO, 'Pelanggan', 'id_pelanggan'),
 		);
 	}
 

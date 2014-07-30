@@ -1,18 +1,18 @@
 <?php
-/* @var $this ProyekController */
+/* @var $this DetailProyekController */
 /* @var $dataProvider CActiveDataProvider */
 
 $this->breadcrumbs=array(
-	'Proyek',
+	'Detail Proyeks',
 );
 
 $this->menu=array(
-	array('label'=>'Entri Data Proyek', 'url'=>array('create')),
-	array('label'=>'Manage Proyek', 'url'=>array('admin')),
+	array('label'=>'Create DetailProyek', 'url'=>array('create')),
+	array('label'=>'Manage DetailProyek', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Data Proyek</h1>
+<h1>Detail Proyeks</h1>
 
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,

@@ -1,6 +1,6 @@
 <?php
 
-class ProyekController extends Controller
+class DetailProyekController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -29,7 +29,7 @@ class ProyekController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view'),
-				'users'=>array('*'),
+				'users'=>array('@'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('create','update'),
@@ -60,22 +60,24 @@ class ProyekController extends Controller
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreate()
+	public function actionCreate($proyekid)
 	{
-		$model=new Proyek;
+		$model = new DetailProyek;
+		$proyek = Proyek::model()->findByPk($proyekid);
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Proyek']))
+		if(isset($_POST['DetailProyek']))
 		{
-			$model->attributes=$_POST['Proyek'];
+			$model->attributes=$_POST['DetailProyek'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id_proyek));
+				$this->redirect(array('view','id'=>$model->id_detail_proyek));
 		}
 
 		$this->render('create',array(
 			'model'=>$model,
+			'proyek'=>$proyek
 		));
 	}
 
@@ -84,22 +86,24 @@ class ProyekController extends Controller
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 * @param integer $id the ID of the model to be updated
 	 */
-	public function actionUpdate($id)
+	public function actionUpdate($id, $proyekid)
 	{
 		$model=$this->loadModel($id);
+		$proyek = Proyek::model()->findByPk($proyekid);
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Proyek']))
+		if(isset($_POST['DetailProyek']))
 		{
-			$model->attributes=$_POST['Proyek'];
+			$model->attributes=$_POST['DetailProyek'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id_proyek));
+				$this->redirect(array('view','id'=>$model->id_detail_proyek));
 		}
 
 		$this->render('update',array(
 			'model'=>$model,
+			'proyek'=>$proyek
 		));
 	}
 
@@ -110,6 +114,7 @@ class ProyekController extends Controller
 	 */
 	public function actionDelete($id)
 	{
+		var_dump($id);
 		$this->loadModel($id)->delete();
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
@@ -122,7 +127,7 @@ class ProyekController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Proyek');
+		$dataProvider=new CActiveDataProvider('DetailProyek');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -133,10 +138,10 @@ class ProyekController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new Proyek('search');
+		$model=new DetailProyek('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Proyek']))
-			$model->attributes=$_GET['Proyek'];
+		if(isset($_GET['DetailProyek']))
+			$model->attributes=$_GET['DetailProyek'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -147,12 +152,12 @@ class ProyekController extends Controller
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer $id the ID of the model to be loaded
-	 * @return Proyek the loaded model
+	 * @return DetailProyek the loaded model
 	 * @throws CHttpException
 	 */
 	public function loadModel($id)
 	{
-		$model=Proyek::model()->findByPk($id);
+		$model=DetailProyek::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -160,11 +165,11 @@ class ProyekController extends Controller
 
 	/**
 	 * Performs the AJAX validation.
-	 * @param Proyek $model the model to be validated
+	 * @param DetailProyek $model the model to be validated
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='proyek-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='detail-proyek-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();

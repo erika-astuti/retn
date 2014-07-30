@@ -37,6 +37,22 @@ class DetailProyek extends CActiveRecord
 		return 'tbl_detail_proyek';
 	}
 
+	public function getAllDetailStatus() {
+		return array(
+			'Sketsa', 
+			'Proses Warna', 
+			'Render',  
+			'Selesai'
+		);
+	}
+
+	public function getDetailStatus() {
+		$st = $this->getAllDetailStatus();
+
+		return isset($st[$this->status_pengerjaan]) 
+			? $st[$this->status_pengerjaan] : '-';
+	}
+
 	/**
 	 * @return array validation rules for model attributes.
 	 */
@@ -76,11 +92,11 @@ class DetailProyek extends CActiveRecord
 	{
 		return array(
 			'id_detail_proyek' => 'Id Detail Proyek',
-			'tanggal_jatuh_tempo' => 'Tanggal Jatuh Tempo',
-			'no_detail_invoice' => 'No Detail Invoice',
+			'tanggal_jatuh_tempo' => 'Jatuh Tempo',
+			'no_detail_invoice' => 'Detail Invoice',
 			'keterangan' => 'Keterangan',
-			'waktu_terselesaikan' => 'Waktu Terselesaikan',
-			'status_pengerjaan' => 'Status Pengerjaan',
+			'waktu_terselesaikan' => 'Waktu Selesai',
+			'status_pengerjaan' => 'Status',
 			'harga_detail' => 'Harga Detail',
 			'id_proyek' => 'Id Proyek',
 		);
