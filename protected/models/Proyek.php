@@ -44,15 +44,32 @@ class Proyek extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nama_proyek, tanggal_proyek, no_po, no_piutang, id_pelanggan, biaya_proyek', 'required'),
-			array('id_pelanggan', 'numerical', 'integerOnly'=>true),
+			array('nama_proyek, tanggal_proyek, no_po, no_piutang, id_pelanggan, biaya_proyek, aktif', 'required'),
+			array('id_pelanggan, aktif', 'numerical', 'integerOnly'=>true),
 			array('nama_proyek', 'length', 'max'=>255),
 			array('no_po, no_piutang', 'length', 'max'=>128),
 			array('biaya_proyek', 'length', 'max'=>20),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_proyek, nama_proyek, tanggal_proyek, no_po, no_piutang, id_pelanggan, biaya_proyek', 'safe', 'on'=>'search'),
+			array('id_proyek, nama_proyek, tanggal_proyek, no_po, no_piutang, id_pelanggan, biaya_proyek, aktif', 
+				'safe', 'on'=>'search'),
 		);
+	}
+
+	public function getAllAktif()
+	{
+		return array(
+			'Non aktif',
+			'Aktif'
+		);
+	}
+
+	public function getAktifFlag()
+	{
+		$fl = $this->getAllAktif();
+
+		return isset($fl[$this->aktif]) ?
+			$fl[$this->aktif] : '-';
 	}
 
 	/**
@@ -77,10 +94,11 @@ class Proyek extends CActiveRecord
 			'id_proyek' => 'Id Proyek',
 			'nama_proyek' => 'Nama Proyek',
 			'tanggal_proyek' => 'Tanggal Proyek',
-			'no_po' => 'No Po',
+			'no_po' => 'No PO',
 			'no_piutang' => 'No Piutang',
 			'id_pelanggan' => 'Pelanggan',
 			'biaya_proyek' => 'Biaya Proyek',
+			'aktif' => 'Status Aktif',
 		);
 	}
 
@@ -102,6 +120,7 @@ class Proyek extends CActiveRecord
 		$criteria->compare('no_piutang',$this->no_piutang,true);
 		$criteria->compare('id_pelanggan',$this->id_pelanggan);
 		$criteria->compare('biaya_proyek',$this->biaya_proyek,true);
+		$criteria->compare('aktif',$this->aktif,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

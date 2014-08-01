@@ -21,6 +21,7 @@ $this->menu=array(
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
+		'kode_pelanggan',
 		'nama_pelanggan',
 		'nama_institusi_pelanggan',
 		'alamat_pelanggan',
@@ -32,6 +33,6 @@ $this->menu=array(
 		'nama_bank',
 		'no_telp_pelanggan',
 		'fax_pelanggan',
-		'email_pelanggan',
+		'email_pelanggan'
 	),
 )); ?>

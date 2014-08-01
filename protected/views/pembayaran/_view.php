@@ -5,12 +5,9 @@
 
 <div class="view">
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('id_pembayaran')); ?>:</b>
-	<?php echo CHtml::link(CHtml::encode($data->id_pembayaran), array('view', 'id'=>$data->id_pembayaran)); ?>
-	<br />
-
 	<b><?php echo CHtml::encode($data->getAttributeLabel('id_detail_proyek')); ?>:</b>
-	<?php echo CHtml::encode($data->id_detail_proyek); ?>
+	<?php echo CHtml::link(CHtml::encode($data->idDetailProyek->keterangan), 
+		array('view', 'id'=>$data->id_pembayaran)); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('jumlah_transfer')); ?>:</b>
@@ -22,8 +19,7 @@
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('id_bank')); ?>:</b>
-	<?php echo CHtml::encode($data->id_bank); ?>
+	<?php echo CHtml::encode($data->bank->nama_bank); ?>
 	<br />
-
 
 </div>

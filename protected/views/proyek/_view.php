@@ -33,6 +33,9 @@
 		<b><?php echo CHtml::encode($data->getAttributeLabel('biaya_proyek')); ?>:</b>
 		<?php echo CHtml::encode($data->biaya_proyek); ?>
 		<br />
+		<b><?php echo CHtml::encode($data->getAttributeLabel('aktif')); ?>:</b>
+		<?php echo CHtml::encode($data->getAktifFlag()); ?>
+		<br />
 	</div>
 
 

@@ -59,6 +59,14 @@
 	</div>
 
 	<div class="row">
+		<?php echo $form->labelEx($model,'aktif'); ?>
+		<?php echo $form->dropDownList($model, 'aktif', 
+			Proyek::model()->getAllAktif()
+		); ?>
+		<?php echo $form->error($model,'aktif'); ?>
+	</div>
+
+	<div class="row">
 		<?php echo $form->labelEx($model,'biaya_proyek'); ?>
 		<?php echo $form->textField($model,'biaya_proyek',array('size'=>20,'maxlength'=>20)); ?>
 		<?php echo $form->error($model,'biaya_proyek'); ?>

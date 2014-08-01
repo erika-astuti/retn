@@ -38,7 +38,10 @@
 					Info Aplikasi
 				</div>
 			</div>
-			<div class="portlet-content-clear">Konten</div>
+			<div class="portlet-content-clear">
+				<div><i class="fa fa-calendar"></i> <b>Tanggal Hari ini:</b> <?php echo date('d M Y'); ?> </div>
+				<div><i class="fa fa-bell-o"></i> <b>Alamat IP Address:</b> <?php echo $_SERVER['REMOTE_ADDR']; ?></div>
+			</div>
 		</div>
 
 	</div>

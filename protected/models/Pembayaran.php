@@ -59,6 +59,7 @@ class Pembayaran extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'idDetailProyek' => array(self::BELONGS_TO, 'DetailProyek', 'id_detail_proyek'),
+			'bank' => array(self::BELONGS_TO, 'Bank', 'id_bank'),
 		);
 	}
 
@@ -69,10 +70,10 @@ class Pembayaran extends CActiveRecord
 	{
 		return array(
 			'id_pembayaran' => 'Id Pembayaran',
-			'id_detail_proyek' => 'Id Detail Proyek',
+			'id_detail_proyek' => 'Detail Proyek',
 			'jumlah_transfer' => 'Jumlah Transfer',
 			'waktu_transfer' => 'Waktu Transfer',
-			'id_bank' => 'Id Bank',
+			'id_bank' => 'Bank',
 		);
 	}
 

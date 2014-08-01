@@ -25,6 +25,10 @@ $this->menu=array(
 		'no_po',
 		'no_piutang',
 		'biaya_proyek',
+		array(
+			'name'=>'aktif',
+			'value'=>$model->getAktifFlag()
+		)
 	),
 )); ?>
 

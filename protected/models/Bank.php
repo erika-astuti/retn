@@ -54,6 +54,7 @@ class Bank extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'pembayarans' => array(self::HAS_MANY, 'Pembayaran', 'id_bank'),
 		);
 	}
 

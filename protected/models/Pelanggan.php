@@ -50,6 +50,7 @@ class Pelanggan extends CActiveRecord
 			array('nama_pelanggan', 'length', 'max'=>255),
 			array('nama_institusi_pelanggan, nama_bank, email_pelanggan', 'length', 'max'=>128),
 			array('alamat_pelanggan', 'length', 'max'=>512),
+			array('kode_pelanggan', 'length', 'max'=>9),
 			array('no_rekening, no_telp_pelanggan, fax_pelanggan', 'length', 'max'=>32),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -85,6 +86,7 @@ class Pelanggan extends CActiveRecord
 			'no_telp_pelanggan' => 'No Telp Pelanggan',
 			'fax_pelanggan' => 'Fax Pelanggan',
 			'email_pelanggan' => 'Email Pelanggan',
+			'kode_pelanggan' => 'Kode Pelanggan',
 		);
 	}
 
@@ -111,6 +113,20 @@ class Pelanggan extends CActiveRecord
 			'institusi'=>'Institusi', 
 			'individu'=>'Individu'
 		);
+	}
+
+	public function getKodeNomorTerbaru($halfie)
+	{
+		return $halfie.sprintf('%02d', $this->id_pelanggan);
+	}
+
+	public function composeKodePelanggan() 
+	{
+		$plcode = strtoupper(substr($this->tipe_pelanggan, 0, 3));
+		$nmcode = strtoupper(strlen($this->nama_pelanggan) > 3 ?
+			substr($this->nama_pelanggan, 0, 3) : $this->nama_pelanggan);
+
+		return $this->getKodeNomorTerbaru($plcode.'-'.$nmcode);
 	}
 
 	public function getTipePelanggan($data = false) 

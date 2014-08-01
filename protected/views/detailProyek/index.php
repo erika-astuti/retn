@@ -3,16 +3,16 @@
 /* @var $dataProvider CActiveDataProvider */
 
 $this->breadcrumbs=array(
-	'Detail Proyeks',
+	'Detail Proyek',
 );
 
 $this->menu=array(
-	array('label'=>'Create DetailProyek', 'url'=>array('create')),
-	array('label'=>'Manage DetailProyek', 'url'=>array('admin')),
+	array('label'=>'Entri Detail Proyek Baru', 'url'=>array('create')),
+	//array('label'=>'Manage DetailProyek', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Detail Proyeks</h1>
+<h1>Daftar Detail Proyek</h1>
 
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,

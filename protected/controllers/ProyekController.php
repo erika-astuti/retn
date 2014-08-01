@@ -70,8 +70,11 @@ class ProyekController extends Controller
 		if(isset($_POST['Proyek']))
 		{
 			$model->attributes=$_POST['Proyek'];
-			if($model->save())
+			if($model->save()) {
+				$model->kode_pelanggan = $this->composeKodePelanggan();
+				$model->save();
 				$this->redirect(array('view','id'=>$model->id_proyek));
+			}
 		}
 
 		$this->render('create',array(
@@ -94,8 +97,11 @@ class ProyekController extends Controller
 		if(isset($_POST['Proyek']))
 		{
 			$model->attributes=$_POST['Proyek'];
-			if($model->save())
+			if($model->save()) {
+				$model->kode_pelanggan = $this->composeKodePelanggan();
+				$model->save();
 				$this->redirect(array('view','id'=>$model->id_proyek));
+			}
 		}
 
 		$this->render('update',array(
