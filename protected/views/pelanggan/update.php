@@ -3,8 +3,8 @@
 /* @var $model Pelanggan */
 
 $this->breadcrumbs=array(
-	'Pelanggans'=>array('index'),
-	$model->id_pelanggan=>array('view','id'=>$model->id_pelanggan),
+	'Pelanggan'=>array('index'),
+	$model->kode_pelanggan=>array('view','id'=>$model->id_pelanggan),
 	'Update',
 );
 

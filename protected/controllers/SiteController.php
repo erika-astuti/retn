@@ -29,13 +29,48 @@ class SiteController extends Controller
 	{
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
+		$model = false;
+		$proyekAktif = false;
+		$pembayaranJatuhTempo = false;
+
 		if(Yii::app()->user->isGuest) {
 			$model = new LoginForm;
 		} else {
 			$model = false;
+			$proyekAktif = new CActiveDataProvider('Proyek', array(
+				'criteria'=>array(
+					'condition'=>'aktif=:akt',
+					'params'=>array(':akt'=>1)
+				),
+				'pagination' => array(
+					 'pageSize' => 10,
+				),
+			));
 		}
+		
+		$sqlpjt = "select id_detail_proyek as id, tanggal_jatuh_tempo,
+			keterangan from tbl_detail_proyek where id_detail_proyek not in
+			(select id_detail_proyek from tbl_pembayaran)";
+		$sqpjtCount = "select count(*) from (".$sqlpjt.") as pjt";
 
-		$this->render('index', array('model'=>$model));
+		$count = Yii::app()->db->createCommand($sqpjtCount)->queryScalar();
+		$pembayaranJatuhTempo = new CSqlDataProvider($sqlpjt, array(
+			'TotalItemCount'=>$count,
+			'sort'=>array(
+				'attributes'=>array(
+					'id_detail_proyek', 'tanggal_jatuh_tempo', 'keterangan',
+				),
+			),
+			'pagination'=>array(
+				'pageSize'=>10
+			)
+		));
+		
+		$this->render('index', array(
+			'model'=>$model,
+			'proyekAktif'=>$proyekAktif,
+			'pembayaranJatuhTempo'=>$pembayaranJatuhTempo
+		));
 	}
 
 	/**

@@ -70,8 +70,11 @@ class PelangganController extends Controller
 		if(isset($_POST['Pelanggan']))
 		{
 			$model->attributes=$_POST['Pelanggan'];
-			if($model->save())
+			if($model->save()) {
+				$model->kode_pelanggan = $model->composeKodePelanggan();
+				$model->save();
 				$this->redirect(array('view','id'=>$model->id_pelanggan));
+			}
 		}
 
 		$this->render('create',array(
@@ -94,8 +97,11 @@ class PelangganController extends Controller
 		if(isset($_POST['Pelanggan']))
 		{
 			$model->attributes=$_POST['Pelanggan'];
-			if($model->save())
+			if($model->save()) {
+				$model->kode_pelanggan = $model->composeKodePelanggan();
+				$model->save();
 				$this->redirect(array('view','id'=>$model->id_pelanggan));
+			}
 		}
 
 		$this->render('update',array(

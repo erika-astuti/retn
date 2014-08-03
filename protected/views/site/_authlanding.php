@@ -12,7 +12,13 @@
 					Proyek Aktif saat ini	
 				</div>
 			</div>
-			<div class="portlet-content-clear">Konten</div>
+			<div class="portlet-content-clear">
+				<?php $this->widget('zii.widgets.CListView', array(
+					'dataProvider'=>$proyekAktif,
+					'itemView'=>'_view_proyek_aktif',
+				)); 
+				?>
+			</div>
 		</div>
 
 
@@ -23,7 +29,15 @@
 					Detail pembayaran jatuh tempo	
 				</div>
 			</div>
-			<div class="portlet-content-clear">Konten</div>
+			<div class="portlet-content-clear">
+				detail proyek yang belum ada pembayaran lunas
+				<?php 
+				$this->widget('zii.widgets.CListView', array(
+					'dataProvider'=>$pembayaranJatuhTempo,
+					'itemView'=>'_view_pembayaran_jatuh_tempo',
+				)); 
+				?>
+			</div>
 		</div>
 
 	</div>

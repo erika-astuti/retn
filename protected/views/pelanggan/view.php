@@ -3,8 +3,8 @@
 /* @var $model Pelanggan */
 
 $this->breadcrumbs=array(
-	'Pelanggans'=>array('index'),
-	$model->id_pelanggan,
+	'Pelanggan'=>array('index'),
+	$model->kode_pelanggan,
 );
 
 $this->menu=array(
@@ -16,12 +16,11 @@ $this->menu=array(
 );
 ?>
 
-<h1>View Pelanggan #<?php echo $model->id_pelanggan; ?></h1>
+<h1>View Pelanggan <?php echo $model->kode_pelanggan; ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
-		'kode_pelanggan',
 		'nama_pelanggan',
 		'nama_institusi_pelanggan',
 		'alamat_pelanggan',

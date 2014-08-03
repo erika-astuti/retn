@@ -258,3 +258,8 @@ div.search-form
 .menu-spacer {
 	margin-top:5px;
 }
+
+.dashboard-list {
+	border-bottom: 1px solid #EEEEEE;
+	margin-bottom:4px;
+}

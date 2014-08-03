@@ -40,5 +40,8 @@
 	<?php $this->endWidget(); ?>
 	</div><!-- form -->
 <?php else: //end if user is guest ?> 
-	<?php $this->renderPartial('_authlanding'); ?>
+	<?php $this->renderPartial('_authlanding', array(
+		'proyekAktif'=>$proyekAktif,
+		'pembayaranJatuhTempo'=>$pembayaranJatuhTempo
+	)); ?>
 <?php endif;?>
