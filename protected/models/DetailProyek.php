@@ -68,6 +68,14 @@ class DetailProyek extends CActiveRecord
 		return $this->kategoriStatusPengerjaan;
 	}
 
+   public function beforeDelete() {
+      Pembayaran::model()->deleteAllByAttributes(array(
+         'id_detail_proyek'=>$this->id_detail_proyek
+      ));
+
+      return true;
+   }
+
 	public function getAllDetailStatus() {
       $dtstat = array();
 

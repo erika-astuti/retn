@@ -102,6 +102,14 @@ class Proyek extends CActiveRecord
 		);
 	}
 
+   public function beforeDelete() {
+      DetailProyek::model()->deleteAllByAttributes(array(
+         'id_proyek'=>$this->id_proyek
+      ));
+
+      return true;
+   }
+
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
