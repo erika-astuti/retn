@@ -37,20 +37,70 @@ class DetailProyek extends CActiveRecord
 		return 'tbl_detail_proyek';
 	}
 
-	public function getAllDetailStatus() {
-		return array(
-			'Sketsa', 
-			'Proses Warna', 
-			'Render',  
-			'Selesai'
-		);
+   public $kategoriStatusPengerjaan = array(
+      'Pra Produksi',
+      'Produksi',
+      'Paska Produksi'
+   );
+
+   public $detailStatusPengerjaan = array(
+      array( //pra produksi
+         'naskah',
+         'desain karakter dan non karakter',
+         'storyboard',
+         'modeling karakter dan non karakter',
+         'rigging dan texturing',
+         'dubbing'
+      ),
+      array( //produksi
+         'animasi',
+         'lighting dan rendering'
+      ),
+      array( //paska produksi
+         'audio',
+         'editing',
+         'mastering',
+         'delivery'
+      ),
+   );
+
+	public function getAllKategoriStatus() {
+		return $this->kategoriStatusPengerjaan;
 	}
 
-	public function getDetailStatus() {
-		$st = $this->getAllDetailStatus();
+	public function getAllDetailStatus() {
+      $dtstat = array();
 
-		return isset($st[$this->status_pengerjaan]) 
-			? $st[$this->status_pengerjaan] : '-';
+      foreach($this->kategoriStatusPengerjaan as $catKey => $catVal) {
+         if(isset($this->detailStatusPengerjaan[$catKey])) {
+            foreach($this->detailStatusPengerjaan[$catKey] as $detKey => $detVal) {
+               $dtstat[$catVal][$catKey.$detKey] = $detVal;
+            }
+         }
+      }
+
+		return $dtstat;
+   }
+
+	public function getDetailStatus() {
+      if(strlen($this->status_pengerjaan) == 2) {
+         $outstr = '';
+         if(isset($this->kategoriStatusPengerjaan[$this->status_pengerjaan[0]]) ) {
+            $outstr .= $this->kategoriStatusPengerjaan[$this->status_pengerjaan[0]];
+            if(isset(
+                  $this->detailStatusPengerjaan[$this->status_pengerjaan[0]]
+                  [$this->status_pengerjaan[1]]
+               )) {
+               $outstr .= ', '.$this->detailStatusPengerjaan[$this->status_pengerjaan[0]]
+                  [$this->status_pengerjaan[1]];
+            }
+         }
+
+         return $outstr;
+
+      } else {
+         return '-';
+      }
 	}
 
 	/**

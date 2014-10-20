@@ -31,7 +31,7 @@
 
 	<div id="header">
 		<div id="logo">
-		<i class="fa fa-university fa-1x"></i> 
+      <img src="/images/<?php echo Yii::app()->params['headerImage']; ?>" width="80em;" height="80em;" alt=""/>
 		<?php echo CHtml::encode(Yii::app()->name); ?></div>
 	</div><!-- header -->
 
@@ -60,7 +60,7 @@
 	<div class="clear"></div>
 
 	<div id="footer">
-		Copyright &copy; <?php echo date('Y'); ?> by retn ndut.<br/>
+		Copyright &copy; <?php echo date('Y'); ?> by Retno Arini.<br/>
 		All Rights Reserved.<br/>
 	</div><!-- footer -->
 

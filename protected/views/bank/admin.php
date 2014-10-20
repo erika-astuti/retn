@@ -3,13 +3,13 @@
 /* @var $model Bank */
 
 $this->breadcrumbs=array(
-	'Banks'=>array('index'),
-	'Manage',
+	'Bank'=>array('index'),
+	'Atur',
 );
 
 $this->menu=array(
-	array('label'=>'List Bank', 'url'=>array('index')),
-	array('label'=>'Create Bank', 'url'=>array('create')),
+	array('label'=>'List Data Bank', 'url'=>array('index')),
+	array('label'=>'Entri Bank', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -26,7 +26,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Manage Data Bank</h1>
+<h1>Atur Data Bank</h1>
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'bank-grid',

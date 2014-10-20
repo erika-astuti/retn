@@ -7,12 +7,12 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Create Bank', 'url'=>array('create')),
-	array('label'=>'Manage Bank', 'url'=>array('admin')),
+	array('label'=>'Entri Baru', 'url'=>array('create')),
+	array('label'=>'Atur Data Bank', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Daftar Bank</h1>
+<h1>List Data Bank</h1>
 
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,

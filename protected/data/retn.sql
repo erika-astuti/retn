@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS `tbl_detail_proyek` (
   `no_detail_invoice` varchar(128) NOT NULL,
   `keterangan` varchar(512) NOT NULL,
   `waktu_terselesaikan` datetime NOT NULL,
-  `status_pengerjaan` smallint(6) NOT NULL,
+  `status_pengerjaan` char(2) NOT NULL,
   `harga_detail` bigint(20) NOT NULL,
   `id_proyek` int(11) NOT NULL,
   PRIMARY KEY (`id_detail_proyek`),
