@@ -86,6 +86,6 @@ return array(
 	'params'=>array(
 		// this is used in contact page
 		'adminEmail'=>'webmaster@example.com',
-      'headerImage'=>'customer-male.png'
+      'headerImage'=>'kasat-mata-header.png'
 	),
 );
