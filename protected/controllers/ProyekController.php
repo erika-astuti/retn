@@ -7,7 +7,6 @@ class ProyekController extends Controller
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
 	public $layout='//layouts/column2';
-
 	/**
 	 * @return array action filters
 	 */
@@ -32,7 +31,7 @@ class ProyekController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update', 'cetakPo', 'cetakInvoice'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -116,7 +115,8 @@ class ProyekController extends Controller
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+			$this->redirect(isset($_POST['returnUrl']) 
+				? $_POST['returnUrl'] : array('admin'));
 	}
 
 	/**
@@ -129,6 +129,18 @@ class ProyekController extends Controller
 			'dataProvider'=>$dataProvider,
 		));
 	}
+
+   public function actionCetakPo($id) {
+      $this->layout='//layouts/print';
+		$this->render('print-po',array(
+		));
+   }
+
+   public function actionCetakInvoice($id) {
+      $this->layout='//layouts/print';
+		$this->render('print-invoice',array(
+		));
+   }
 
 	/**
 	 * Manages all models.

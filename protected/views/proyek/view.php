@@ -16,7 +16,7 @@ $this->menu=array(
 );
 ?>
 
-<h2>Proyek <?php echo $model->nama_proyek; ?></h2>
+<h2><i class="fa fa-cubes"></i> Proyek <?php echo $model->nama_proyek; ?></h2>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
@@ -33,7 +33,7 @@ $this->menu=array(
 )); ?>
 
 <div class="menu-spacer">
-	<h3>Info Pelanggan</h3>
+	<h3><i class="fa fa-male"></i> Info Pelanggan</h3>
 	<?php $this->widget('zii.widgets.CDetailView', array(
 		'data'=>$model->pelanggan,
 		'attributes'=>array(
@@ -45,7 +45,13 @@ $this->menu=array(
 </div>
 
 <div class="menu-spacer">
-	<h3>Detail Proyek</h3>
+   <button class="button" id="po-print">
+      <i class="fa fa-print"></i> Cetak Purchase Order 
+   </button>
+</div>
+
+<div class="menu-spacer">
+	<h3><i class="fa fa-eye"></i> Detail Proyek</h3>
 	<?php 
 	$dProProvider = new CActiveDataProvider('DetailProyek', array(
 		'criteria'=>array(
@@ -61,17 +67,27 @@ $this->menu=array(
 		'id'=>'detail-proyek-grid',
 		'dataProvider'=>$dProProvider,
 		'columns'=>array(
+         array(
+            'header'=>'Cetak Invoice',
+            'type'=>'raw',
+            'value'=>function($data) {
+               return '<center>'
+                  .'<button class="detail-inv-print" data-id="'
+                     .$data->id_detail_proyek.'"><i class="fa fa-print"></i></button>'
+                  .'</center>';
+             }
+         ),
 			'tanggal_jatuh_tempo', 
 			'no_detail_invoice', 
-			'waktu_terselesaikan', 
-			array(
-				'name'=>'status_pengerjaan',
-				'value'=>function($data) {
-					return $data->getDetailStatus();
-				}
-			),
+			//'waktu_terselesaikan', 
+			//array(
+				//'name'=>'status_pengerjaan',
+				//'value'=>function($data) {
+					//return $data->getDetailStatus();
+				//}
+			//),
 			'harga_detail', 
-			'keterangan', 
+         'keterangan', 
 			array(
 				'header'=>'Opsi',
 				'name'=>'id_detail_proyek',
@@ -96,6 +112,27 @@ $this->menu=array(
 
 <script type="text/javascript">
 	$(document).ready(function() {
+      $('#po-print').click(function(ev) {
+         ev.preventDefault();
+         window.open(
+            '<?php echo Yii::app()->baseUrl; ?>/index.php/proyek/cetakpo/<?php 
+               echo $model->id_proyek; ?>',
+            'Cetak Purchase Order',
+            "directories=0,titlebar=0,toolbar=0,location=0,status=0,menubar=0," 
+               + "scrollbars=no,resizable=no,width=670px,height=650px"
+            ); 
+      });
+
+      $('.detail-inv-print').click(function(ev) {
+         ev.preventDefault();
+         window.open(
+            '<?php echo Yii::app()->baseUrl; ?>/index.php/proyek/cetakinvoice/' + $(this).attr('data-id'),
+            'Cetak Invoice',
+            "directories=0,titlebar=0,toolbar=0,location=0,status=0,menubar=0," 
+               + "scrollbars=no,resizable=no,width=670px,height=650px"
+            ); 
+      });
+
 		$('.grid-del').click(function(ev) {
 			ev.preventDefault();
 			var url = '<?php echo Yii::app()->baseUrl ?>/index.php';
