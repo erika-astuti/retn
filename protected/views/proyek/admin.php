@@ -3,13 +3,13 @@
 /* @var $model Proyek */
 
 $this->breadcrumbs=array(
-	'Proyeks'=>array('index'),
-	'Manage',
+	'Proyek'=>array('index'),
+	'Atur',
 );
 
 $this->menu=array(
-	array('label'=>'List Proyek', 'url'=>array('index')),
-	array('label'=>'Create Proyek', 'url'=>array('create')),
+	array('label'=>'Daftar Proyek', 'url'=>array('index')),
+	array('label'=>'Buat Proyek', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "

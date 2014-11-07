@@ -3,13 +3,13 @@
 /* @var $model Pembayaran */
 
 $this->breadcrumbs=array(
-	'Pembayarans'=>array('index'),
-	'Manage',
+	'Pembayaran'=>array('index'),
+	'Atur',
 );
 
 $this->menu=array(
-	array('label'=>'List Pembayaran', 'url'=>array('index')),
-	array('label'=>'Create Pembayaran', 'url'=>array('create')),
+	array('label'=>'Daftar Pembayaran', 'url'=>array('index')),
+	array('label'=>'Buat Baru Pembayaran', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -26,7 +26,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Manage Pembayarans</h1>
+<h1>Atur Data Pembayarans</h1>
 
 <p>
 You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>

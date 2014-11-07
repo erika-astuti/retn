@@ -3,16 +3,16 @@
 /* @var $model Proyek */
 
 $this->breadcrumbs=array(
-	'Proyeks'=>array('index'),
-	'Create',
+	'Proyek'=>array('index'),
+	'Buat Baru',
 );
 
 $this->menu=array(
-	array('label'=>'List Proyek', 'url'=>array('index')),
-	array('label'=>'Manage Proyek', 'url'=>array('admin')),
+	array('label'=>'Daftar Proyek', 'url'=>array('index')),
+	array('label'=>'Atur Proyek', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Create Proyek</h1>
+<h1>Buat Data Proyek</h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

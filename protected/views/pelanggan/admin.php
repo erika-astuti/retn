@@ -3,13 +3,13 @@
 /* @var $model Pelanggan */
 
 $this->breadcrumbs=array(
-	'Pelanggans'=>array('index'),
-	'Manage',
+	'Pelanggan'=>array('index'),
+	'Atur Data Pelanggan',
 );
 
 $this->menu=array(
-	array('label'=>'List Pelanggan', 'url'=>array('index')),
-	array('label'=>'Create Pelanggan', 'url'=>array('create')),
+	array('label'=>'Buat Pelanggan', 'url'=>array('index')),
+	array('label'=>'Entri Pelanggan Baru', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -26,7 +26,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Manage Data Pelanggan</h1>
+<h1>Atur Data Pelanggan</h1>
 
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
