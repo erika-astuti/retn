@@ -37,14 +37,15 @@
 
 	<div id="mainmenu">
 		<?php $this->widget('zii.widgets.CMenu',array(
+			'encodeLabel'=>false,
 			'items'=>array(
-				array('label'=>'Home', 'url'=>array('/site/index')),
+				array('label'=>'<i class="fa fa-home"></i> Home', 'url'=>array('/site/index')),
 				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
-				array('label'=>'Proyek', 'url'=>array('/proyek'), 'visible'=>!Yii::app()->user->isGuest),
-				array('label'=>'Pembayaran', 'url'=>array('/pembayaran'), 'visible'=>!Yii::app()->user->isGuest),
-				array('label'=>'Pelanggan', 'url'=>array('/pelanggan'), 'visible'=>!Yii::app()->user->isGuest),
-				array('label'=>'Bank', 'url'=>array('/bank'), 'visible'=>!Yii::app()->user->isGuest),
-				array('label'=>'User', 'url'=>array('/user'), 'visible'=>!Yii::app()->user->isGuest),
+				array('label'=>'<i class="fa fa-cubes"></i> Proyek', 'url'=>array('/proyek'), 'visible'=>!Yii::app()->user->isGuest),
+				array('label'=>'<i class="fa fa-money"></i> Pembayaran', 'url'=>array('/pembayaran'), 'visible'=>!Yii::app()->user->isGuest),
+				array('label'=>'<i class="fa fa-male"></i> Pelanggan', 'url'=>array('/pelanggan'), 'visible'=>!Yii::app()->user->isGuest),
+				array('label'=>'<i class="fa fa-bank"></i> Bank', 'url'=>array('/bank'), 'visible'=>!Yii::app()->user->isGuest),
+				array('label'=>'<i class="fa fa-users"></i> User', 'url'=>array('/user'), 'visible'=>!Yii::app()->user->isGuest),
 				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 			),
 		)); ?>
