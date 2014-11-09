@@ -112,6 +112,21 @@
 .printTable tr:first-child td:last-child{
 	border-width:0px 0px 1px 1px;
 }
+
+#print-page {
+	margin: 6px;
+	padding-bottom: 3px;
+	border-bottom: 1px solid #eeeeee;
+}
+
+@media print
+{    
+    .no-print, .no-print *
+    {
+        display: none !important;
+    }
+}
+
    </style>
 
 	<link rel="stylesheet" type="text/css" 
@@ -120,7 +135,26 @@
 </head>
 
 <body>
+	<div id="print-page" class="no-print">
+		<button id="window-print">Cetak</button> &nbsp;
+		<button id="window-close">Tutup</button>
+	</div>
    <?php echo $content; ?>
 </body>
+
+<?php Yii::app()->clientScript->registerCoreScript('jquery'); ?>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#window-print').click(function(ev) {
+			ev.preventDefault();
+
+			window.print();
+		}); 
+		$('#window-close').click(function(ev) {
+			ev.preventDefault();
+			window.close();
+		}); 
+	});
+</script>
 
 </html>

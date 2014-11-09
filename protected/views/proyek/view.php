@@ -16,7 +16,7 @@ $this->menu=array(
 );
 ?>
 
-<h2><i class="fa fa-cubes"></i> Proyek <?php echo $model->nama_proyek; ?></h2>
+<h2><i class="fa fa-cube"></i> Proyek <?php echo $model->nama_proyek; ?></h2>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
@@ -24,7 +24,10 @@ $this->menu=array(
 		'tanggal_proyek',
 		'no_po',
 		'no_piutang',
-		'biaya_proyek',
+		array(
+			'name'=>'biaya_proyek',
+			'value'=>'Rp '.number_format($model->biaya_proyek)
+		),
 		array(
 			'name'=>'aktif',
 			'value'=>$model->getAktifFlag()
@@ -45,10 +48,13 @@ $this->menu=array(
 </div>
 
 <div class="menu-spacer">
-   <button class="button" id="po-print">
-      <i class="fa fa-print"></i> Cetak Purchase Order 
-   </button>
+	<span style="display: block;float: right;">
+	   <button class="button" id="po-print">
+	      <i class="fa fa-print"></i> Cetak Purchase Order 
+	   </button>
+	</span>
 </div>
+<div class="menu-spacer">&nbsp;</div>
 
 <div class="menu-spacer">
 	<h3><i class="fa fa-eye"></i> Detail Proyek</h3>
