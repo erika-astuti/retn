@@ -11,7 +11,11 @@ $this->menu=array(
 	array('label'=>'Daftar Proyek', 'url'=>array('index')),
 	array('label'=>'Buat Proyek', 'url'=>array('create')),
 	array('label'=>'Perbarui Proyek', 'url'=>array('update', 'id'=>$model->id_proyek)),
-	array('label'=>'Hapus Data Proyek', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id_proyek),'confirm'=>'Are you sure you want to delete this item?')),
+	array('label'=>'Hapus Data Proyek', 'url'=>'#', 'linkOptions'=>array(
+			'submit'=>array('delete','id'=>$model->id_proyek),
+			'confirm'=>'Are you sure you want to delete this item?'
+		)
+	),
 	//array('label'=>'Atur Proyek', 'url'=>array('admin')),
 );
 ?>
@@ -125,7 +129,7 @@ $this->menu=array(
                echo $model->id_proyek; ?>',
             'Cetak Purchase Order',
             "directories=0,titlebar=0,toolbar=0,location=0,status=0,menubar=0," 
-               + "scrollbars=no,resizable=no,width=670px,height=650px"
+               + "scrollbars=no,resizable=no,width=670px,height=730px"
             ); 
       });
 
@@ -135,7 +139,7 @@ $this->menu=array(
             '<?php echo Yii::app()->baseUrl; ?>/index.php/proyek/cetakinvoice/' + $(this).attr('data-id'),
             'Cetak Invoice',
             "directories=0,titlebar=0,toolbar=0,location=0,status=0,menubar=0," 
-               + "scrollbars=no,resizable=no,width=670px,height=650px"
+               + "scrollbars=no,resizable=no,width=670px,height=750px"
             ); 
       });
 

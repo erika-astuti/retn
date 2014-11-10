@@ -94,7 +94,7 @@
 	border:0px solid #000000;
 	text-align:center;
 	border-width:0px 0px 1px 1px;
-	font-size:14px;
+	font-size:12px;
 	font-family:Arial;
 	font-weight:bold;
 	color:#000000;
@@ -117,6 +117,11 @@
 	margin: 6px;
 	padding-bottom: 3px;
 	border-bottom: 1px solid #eeeeee;
+	background-color: #f8f8f8;
+}
+
+.ln-blue {
+	color: blue;
 }
 
 @media print
