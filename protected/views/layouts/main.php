@@ -31,7 +31,7 @@
 
 	<div id="header">
 		<div id="logo">
-      <img src="/images/<?php echo Yii::app()->params['headerImage']; ?>" width="80em;" height="80em;" alt=""/>
+      <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/<?php echo Yii::app()->params['headerImage']; ?>" width="80em;" height="80em;" alt=""/>
 		<?php echo CHtml::encode(Yii::app()->name); ?></div>
 	</div><!-- header -->
 

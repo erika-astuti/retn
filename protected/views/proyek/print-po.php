@@ -6,7 +6,8 @@
             <td style="width:520px;">&nbsp;</td>
             <td>
                <img alt="studio kasat mata" 
-                  src="/images/<?php echo Yii::app()->params['headerImage']; ?>" width="90em;" height="90em;"/>
+                  src="<?php echo Yii::app()->request->baseUrl; 
+                     ?>/images/<?php echo Yii::app()->params['headerImage']; ?>" width="90em;" height="90em;"/>
             </td>
          </tr>
       </table>

@@ -131,15 +131,39 @@ class ProyekController extends Controller
 	}
 
    public function actionCetakPo($id) {
-      $this->layout='//layouts/print';
-		$this->render('print-po',array(
-		));
+   	$retrievedProyek = Proyek::model()->findByPk($id);
+
+   	if($retrievedProyek) {
+   		$pelanggan = $retrievedProyek->pelanggan;
+
+	      $this->layout = '//layouts/print';
+			$this->render('print-po',array(
+				'proyek'=>$retrievedProyek,
+				'pelanggan'=>$pelanggan
+			));
+   	} else {
+			throw new CHttpException(404, 'Invalid Proyek ID');
+   	}
    }
 
    public function actionCetakInvoice($id) {
-      $this->layout='//layouts/print';
-		$this->render('print-invoice',array(
-		));
+   	$retrievedDetailProyek = DetailProyek::model()->findByPk($id);
+
+   	if($retrievedDetailProyek) {
+   		$proyek = $retrievedDetailProyek->idProyek;
+   		$pelanggan = $proyek->pelanggan;
+
+	      $this->layout = '//layouts/print';
+			$this->render('print-invoice',array(
+				'detailproyek'=>$retrievedDetailProyek,
+				'proyek'=>$proyek,
+				'pelanggan'=>$pelanggan
+			));
+
+   	} else {
+			throw new CHttpException(404, 'Invalid Detail Proyek ID');
+   	}
+
    }
 
 	/**

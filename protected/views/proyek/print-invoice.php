@@ -6,7 +6,7 @@
             <td style="width:520px;">&nbsp;</td>
             <td>
                <img alt="studio kasat mata" 
-                  src="/images/<?php echo Yii::app()->params['headerImage']; ?>" width="90em;" height="90em;"/>
+                  src="<?php echo Yii::app()->request->baseUrl; ?>/images/<?php echo Yii::app()->params['headerImage']; ?>" width="90em;" height="90em;"/>
             </td>
          </tr>
       </table>
@@ -48,9 +48,15 @@
                <?php echo $proyek->nama_proyek; ?> <br />
                <?php echo $detailproyek->getDetailStatus(); ?>
             </td>
-            <td rowspan="2" style="text-align: right;"><?php echo number_format($detailproyek->harga_detail); ?></td>
-            <td rowspan="2"><?php echo date('d M Y', strtotime($detailproyek->tanggal_jatuh_tempo)); ?></td>
-            <td rowspan="2" style="text-align: right;"><?php echo number_format($detailproyek->harga_detail); ?></td>
+            <td rowspan="2" style="text-align: right;">
+               <?php echo number_format($detailproyek->harga_detail); ?>
+            </td>
+            <td rowspan="2">
+               <?php echo date('d M Y', strtotime($detailproyek->tanggal_jatuh_tempo)); ?>
+            </td>
+            <td rowspan="2" style="text-align: right;">
+               <?php echo number_format($detailproyek->harga_detail); ?>
+            </td>
          </tr>
          <tr>
             <td>&nbsp;</td>

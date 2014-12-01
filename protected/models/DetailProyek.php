@@ -119,14 +119,16 @@ class DetailProyek extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('tanggal_jatuh_tempo, no_detail_invoice, keterangan, waktu_terselesaikan, status_pengerjaan, harga_detail, id_proyek', 'required'),
+			array('tanggal_jatuh_tempo, no_detail_invoice, keterangan, 
+				waktu_terselesaikan, status_pengerjaan, harga_detail, id_proyek', 'required'),
 			array('status_pengerjaan, id_proyek', 'numerical', 'integerOnly'=>true),
 			array('no_detail_invoice', 'length', 'max'=>128),
 			array('keterangan', 'length', 'max'=>512),
 			array('harga_detail', 'length', 'max'=>20),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_detail_proyek, tanggal_jatuh_tempo, no_detail_invoice, keterangan, waktu_terselesaikan, status_pengerjaan, harga_detail, id_proyek', 'safe', 'on'=>'search'),
+			array('id_detail_proyek, tanggal_jatuh_tempo, no_detail_invoice, 
+				keterangan, waktu_terselesaikan, status_pengerjaan, harga_detail, id_proyek', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -162,7 +164,8 @@ class DetailProyek extends CActiveRecord
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
-	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
+	 * @return CActiveDataProvider the data provider that can 
+	 *	return the models based on the search/filter conditions.
 	 */
 	public function search()
 	{
