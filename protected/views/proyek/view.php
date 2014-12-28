@@ -96,7 +96,15 @@ $this->menu=array(
 					//return $data->getDetailStatus();
 				//}
 			//),
-			'harga_detail', 
+			array(
+				'name'=>'harga_detail',
+				'value'=>function($data) {
+					return 'Rp '.number_format($data->harga_detail);
+				},
+				'htmlOptions'=>array(
+					'style'=>'text-align: right;'
+				)
+			),
          'keterangan', 
 			array(
 				'header'=>'Opsi',

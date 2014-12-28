@@ -33,11 +33,33 @@ $('.search-form form').submit(function(){
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
-		'id_pembayaran',
-		'id_detail_proyek',
-		'jumlah_transfer',
+		// 'id_pembayaran',
+		array(
+			'name'=>'id_bank',
+			'value'=>'$data->bank->nama_bank',
+			'filter'=>CHtml::listData(
+				Bank::model()->findAll(),
+				'id_bank', 'nama_bank'
+			)
+		),
+		array(
+			'name'=>'id_detail_proyek',
+			'type'=>'raw',
+			'filter'=>CHtml::listData(
+				DetailProyek::model()->findAll(),
+				'id_detail_proyek', 'no_detail_invoice'
+			),
+			'value'=>'Pembayaran::model()->getProyekDetail($data);'
+		),
 		'waktu_transfer',
-		'id_bank',
+		array(
+			'name'=>'jumlah_transfer',
+			'filter'=>false,
+			'value'=>'\'Rp \'.number_format($data->jumlah_transfer)',
+			'htmlOptions'=>array(
+				'style'=>'text-align:right;'
+			)
+		),
 		array(
 			'class'=>'CButtonColumn',
 		),

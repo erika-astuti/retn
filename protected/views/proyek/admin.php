@@ -33,12 +33,15 @@ $('.search-form form').submit(function(){
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
-		'id_proyek',
+		// 'id_proyek',
 		'nama_proyek',
 		'tanggal_proyek',
 		'no_po',
 		'no_piutang',
-		'id_pelanggan',
+		array(
+			'name'=>'id_pelanggan',
+			'value'=>'$data->pelanggan->nama_pelanggan'
+		),
 		/*
 		'biaya_proyek',
 		*/
