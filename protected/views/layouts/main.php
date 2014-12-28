@@ -41,11 +41,11 @@
 			'items'=>array(
 				array('label'=>'<i class="fa fa-home"></i> Home', 'url'=>array('/site/index')),
 				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
-				array('label'=>'<i class="fa fa-cubes"></i> Proyek', 'url'=>array('/proyek'), 'visible'=>!Yii::app()->user->isGuest),
-				array('label'=>'<i class="fa fa-money"></i> Pembayaran', 'url'=>array('/pembayaran'), 'visible'=>!Yii::app()->user->isGuest),
-				array('label'=>'<i class="fa fa-male"></i> Pelanggan', 'url'=>array('/pelanggan'), 'visible'=>!Yii::app()->user->isGuest),
-				array('label'=>'<i class="fa fa-bank"></i> Bank', 'url'=>array('/bank'), 'visible'=>!Yii::app()->user->isGuest),
-				array('label'=>'<i class="fa fa-users"></i> User', 'url'=>array('/user'), 'visible'=>!Yii::app()->user->isGuest),
+				array('label'=>'<i class="fa fa-cubes"></i> Proyek', 'url'=>array('/proyek/admin'), 'visible'=>!Yii::app()->user->isGuest),
+				array('label'=>'<i class="fa fa-money"></i> Pembayaran', 'url'=>array('/pembayaran/admin'), 'visible'=>!Yii::app()->user->isGuest),
+				array('label'=>'<i class="fa fa-male"></i> Pelanggan', 'url'=>array('/pelanggan/admin'), 'visible'=>!Yii::app()->user->isGuest),
+				array('label'=>'<i class="fa fa-bank"></i> Bank', 'url'=>array('/bank/admin'), 'visible'=>!Yii::app()->user->isGuest),
+				array('label'=>'<i class="fa fa-users"></i> User', 'url'=>array('/user/admin'), 'visible'=>!Yii::app()->user->isGuest),
 				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 			),
 		)); ?>
