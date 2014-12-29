@@ -110,6 +110,26 @@ class Proyek extends CActiveRecord
       return true;
    }
 
+   public function getJumlahTerbayar() 
+   {
+		$connection = Yii::app()->db;
+		$sql = "select sum(jumlah_transfer) as mysum from tbl_pembayaran 
+		where id_detail_proyek in (
+		select id_detail_proyek from 
+		    tbl_detail_proyek where 
+		    id_proyek='{$this->id_proyek}'
+		)";
+
+		$command = $connection->createCommand($sql);
+		$jumlah = $command->queryAll();
+
+		if($jumlah[0]['mysum'] == NULL) {
+			return 0;
+		} else {
+			return $jumlah[0]['mysum'];
+		}
+   }
+
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 * @return CActiveDataProvider the data provider that can return 
