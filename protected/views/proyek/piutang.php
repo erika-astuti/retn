@@ -56,7 +56,7 @@ $this->breadcrumbs=array(
 					$totalSaldo += $saldoBuffer;
 				 ?></td>
 				 <td>
-				 	<a href=""<?php echo Yii::app()->request->baseUrl; 
+				 	<a href="<?php echo Yii::app()->request->baseUrl; 
 						?>/index.php/proyek/piutangdetail/<?php 
 				 		echo $proyek->id_proyek; ?>">Detail Piutang</a>
 				 </td>
