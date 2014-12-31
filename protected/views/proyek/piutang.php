@@ -34,7 +34,8 @@ $this->breadcrumbs=array(
 				<td><?php echo $i; ?></td>
 				<td><?php echo $proyek->pelanggan->nama_pelanggan; ?></td>
 				<td>
-					<a href="/index.php/proyek/<?php echo $proyek->id_proyek; ?>"><?php echo $proyek->no_po; ?></a>
+					<a href="<?php echo Yii::app()->request->baseUrl; 
+						?>/index.php/proyek/<?php echo $proyek->id_proyek; ?>"><?php echo $proyek->no_po; ?></a>
 				</td>
 				<td style="text-align:right;">
 					Rp <?php 
@@ -55,7 +56,8 @@ $this->breadcrumbs=array(
 					$totalSaldo += $saldoBuffer;
 				 ?></td>
 				 <td>
-				 	<a href="/index.php/proyek/piutangdetail/<?php 
+				 	<a href=""<?php echo Yii::app()->request->baseUrl; 
+						?>/index.php/proyek/piutangdetail/<?php 
 				 		echo $proyek->id_proyek; ?>">Detail Piutang</a>
 				 </td>
 			</tr>
