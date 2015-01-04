@@ -70,9 +70,9 @@ class DetailProyekController extends Controller
 
 		if(isset($_POST['DetailProyek']))
 		{
-			$model->attributes=$_POST['DetailProyek'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id_detail_proyek));
+			// $model->attributes=$_POST['DetailProyek'];
+			// if($model->save())
+			// 	$this->redirect(array('view','id'=>$model->id_detail_proyek));
 		}
 
 		$this->render('create',array(
@@ -97,6 +97,7 @@ class DetailProyekController extends Controller
 		if(isset($_POST['DetailProyek']))
 		{
 			$model->attributes=$_POST['DetailProyek'];
+			$model->status_pengerjaan = implode(",", $model->status_pengerjaan);
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id_detail_proyek));
 		}

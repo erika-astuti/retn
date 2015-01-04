@@ -62,12 +62,50 @@
 	</div>
 
 	<div class="row">
+
+		<?php 
+			$chkStatusPengerjaan = false;
+			if($model !== null) {
+				$chkStatusPengerjaan = explode(",", $model->status_pengerjaan);
+			}
+		?>
+
+		<?php 
+			$d = DetailProyek::model()->getAllDetailStatus(); 
+			$myKategoriKey = array_keys($d);
+
+			foreach($myKategoriKey as $key) {
+				$checklist = "";
+
+				foreach ($d[$key] as $dkey => $dval) {
+					$ditandai = "";
+
+					if($model !== null && in_array($dkey, $chkStatusPengerjaan)) {
+						$ditandai = "checked=\"true\"";
+					}
+					
+					$checklist .= "&nbsp;&nbsp;<input type=\"checkbox\" 
+						name=\"DetailProyek[status_pengerjaan][]\" {$ditandai}
+						value=\"{$dkey}\"/>&nbsp;{$dval}<br/>";
+				}
+
+				echo "<div>
+					<b>{$key}</b></br>
+					{$checklist}
+				</div>";
+			}
+		?>
+	</div>
+
+	<?php /* ?>
+	<div class="row">
 		<?php echo $form->labelEx($model,'status_pengerjaan'); ?>
 		<?php echo $form->dropDownList($model, 'status_pengerjaan', 
 			DetailProyek::model()->getAllDetailStatus()
 		); ?>
 		<?php echo $form->error($model,'status_pengerjaan'); ?>
 	</div>
+	<?php */ ?>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'keterangan'); ?>

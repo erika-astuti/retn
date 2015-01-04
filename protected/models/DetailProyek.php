@@ -9,7 +9,7 @@
  * @property string $no_detail_invoice
  * @property string $keterangan
  * @property string $waktu_terselesaikan
- * @property integer $status_pengerjaan
+ * @property string $status_pengerjaan
  * @property string $harga_detail
  * @property integer $id_proyek
  *
@@ -90,17 +90,36 @@ class DetailProyek extends CActiveRecord
 		return $dtstat;
    }
 
-	public function getDetailStatus() {
-      if(strlen($this->status_pengerjaan) == 2) {
+   public function getDetailStatus() {
+   	$dstat = explode(",", $this->status_pengerjaan);
+   	$fl = "";
+
+   	if(count($dstat) == 0) {
+   		$fl = "-";
+   		$buffer = array();
+   	} else {
+   		foreach ($dstat as $myStatus) {
+   			$buffer[] = $this->getFlagStatus($myStatus);
+   		}
+
+   		$fl = implode(", ", $buffer);
+   	}
+
+   	return $fl;
+
+   }
+
+	public function getFlagStatus($flagCode) {
+      if(strlen($flagCode) == 2) {
          $outstr = '';
-         if(isset($this->kategoriStatusPengerjaan[$this->status_pengerjaan[0]]) ) {
-            $outstr .= $this->kategoriStatusPengerjaan[$this->status_pengerjaan[0]];
+         if(isset($this->kategoriStatusPengerjaan[$flagCode[0]]) ) {
+            $outstr .= $this->kategoriStatusPengerjaan[$flagCode[0]];
             if(isset(
-                  $this->detailStatusPengerjaan[$this->status_pengerjaan[0]]
-                  [$this->status_pengerjaan[1]]
+                  $this->detailStatusPengerjaan[$flagCode[0]]
+                  [$flagCode[1]]
                )) {
-               $outstr .= ', '.$this->detailStatusPengerjaan[$this->status_pengerjaan[0]]
-                  [$this->status_pengerjaan[1]];
+               $outstr .= ' => '.$this->detailStatusPengerjaan[$flagCode[0]]
+                  [$flagCode[1]];
             }
          }
 
@@ -121,7 +140,7 @@ class DetailProyek extends CActiveRecord
 		return array(
 			array('tanggal_jatuh_tempo, no_detail_invoice, keterangan, 
 				waktu_terselesaikan, status_pengerjaan, harga_detail, id_proyek', 'required'),
-			array('status_pengerjaan, id_proyek', 'numerical', 'integerOnly'=>true),
+			array('id_proyek', 'numerical', 'integerOnly'=>true),
 			array('no_detail_invoice', 'length', 'max'=>128),
 			array('keterangan', 'length', 'max'=>512),
 			array('harga_detail', 'length', 'max'=>20),

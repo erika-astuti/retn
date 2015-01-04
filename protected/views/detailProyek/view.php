@@ -10,8 +10,13 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	//array('label'=>'Daftar Detail Proyek', 'url'=>array('index')),
 	array('label'=>'Entri Detail Proyek Baru', 'url'=>array('detailProyek/create/proyekid/'.$model->id_proyek)),
-	array('label'=>'Update', 'url'=>array('update', 'id'=>$model->id_detail_proyek)),
-	array('label'=>'Hapus', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id_detail_proyek),'confirm'=>'Are you sure you want to delete this item?')),
+	array('label'=>'Update', 'url'=>array('update', 
+		'id'=>$model->id_detail_proyek,
+		'proyekid'=>$model->id_proyek
+	)),
+	array('label'=>'Hapus', 'url'=>'#', 'linkOptions'=>array(
+		'submit'=>array('delete',
+			'id'=>$model->id_detail_proyek),'confirm'=>'Are you sure you want to delete this item?')),
 	//array('label'=>'Atur Detail Proyek', 'url'=>array('admin')),
 );
 ?>
