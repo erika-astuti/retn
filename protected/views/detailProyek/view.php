@@ -34,6 +34,7 @@ $this->menu=array(
 		array(
 			'header'=>'Status',
 			'name'=>'status_pengerjaan',
+			'type'=>'raw',
 			'value'=>$model->getDetailStatus()
 		),
 		'harga_detail',

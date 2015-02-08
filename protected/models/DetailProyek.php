@@ -68,6 +68,12 @@ class DetailProyek extends CActiveRecord
 		return $this->kategoriStatusPengerjaan;
 	}
 
+	public function beforeSave() {
+		$this->status_pengerjaan = implode(",", $this->status_pengerjaan);
+
+		return true;
+	}
+
    public function beforeDelete() {
       Pembayaran::model()->deleteAllByAttributes(array(
          'id_detail_proyek'=>$this->id_detail_proyek
@@ -102,7 +108,7 @@ class DetailProyek extends CActiveRecord
    			$buffer[] = $this->getFlagStatus($myStatus);
    		}
 
-   		$fl = implode(", ", $buffer);
+   		$fl = implode(" ", $buffer);
    	}
 
    	return $fl;
@@ -117,9 +123,9 @@ class DetailProyek extends CActiveRecord
             if(isset(
                   $this->detailStatusPengerjaan[$flagCode[0]]
                   [$flagCode[1]]
-               )) {
-               $outstr .= ' => '.$this->detailStatusPengerjaan[$flagCode[0]]
-                  [$flagCode[1]];
+			            )) {
+               $outstr .= ' -> '.$this->detailStatusPengerjaan[$flagCode[0]]
+                  [$flagCode[1]].'</br >';
             }
          }
 
