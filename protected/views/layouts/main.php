@@ -29,11 +29,26 @@
 
 <div class="container" id="page">
 
+<div id="header" class="container">
+	<div class="logo span-3">
+      <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/<?php echo Yii::app()->params['headerImage']; ?>"
+      	 width="85em;" height="85em;" alt=""/>
+	</div>
+	<div class="logo text span-17">
+		<?php echo CHtml::encode(Yii::app()->name); ?> <br />
+		<small>PT STUDIO KASATMATA</small>
+	</div>
+</div>
+
+	<?php /* 
 	<div id="header">
 		<div id="logo">
       <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/<?php echo Yii::app()->params['headerImage']; ?>" width="80em;" height="80em;" alt=""/>
-		<?php echo CHtml::encode(Yii::app()->name); ?></div>
+		<?php echo CHtml::encode(Yii::app()->name); ?> <br />
+		PT STUDIO KASATMATA
+		</div>
 	</div><!-- header -->
+	<?php */ ?>
 
 	<div id="mainmenu">
 		<?php $this->widget('zii.widgets.CMenu',array(
