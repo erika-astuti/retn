@@ -79,8 +79,13 @@ class Pembayaran extends CActiveRecord
 
 	public function getProyekDetail($data) 
 	{
-		return "<b>{$data->idDetailProyek->idProyek->nama_proyek}</b><br />"
-			."{$data->idDetailProyek->no_detail_invoice}";
+		if (isset($data->idDetailProyek)) {
+			return "<b>{$data->idDetailProyek->idProyek->nama_proyek}</b><br />"
+				."{$data->idDetailProyek->no_detail_invoice}";
+		
+		} else {
+			return '-';
+		}
 	}
 
 	/**

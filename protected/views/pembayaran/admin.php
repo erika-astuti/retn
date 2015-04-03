@@ -36,7 +36,13 @@ $('.search-form form').submit(function(){
 		// 'id_pembayaran',
 		array(
 			'name'=>'id_bank',
-			'value'=>'$data->bank->nama_bank',
+			'value'=>function($data) {
+				if (isset($data->bank)) {
+					return $data->bank->nama_bank;
+				} else {
+					return '-';
+				}
+			 },
 			'filter'=>CHtml::listData(
 				Bank::model()->findAll(),
 				'id_bank', 'nama_bank'
