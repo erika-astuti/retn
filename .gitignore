@@ -1,6 +1,7 @@
 *.swp
 *.swo
 .DS_Store
+.phpintel
 protected/config/main.php
 protected/runtime
 assets
