@@ -49,7 +49,8 @@ $('.search-form form').submit(function(){
                 'style'=>'text-align: right;'
             ),
             'value'=>function($data) {
-                return 'Rp '.number_format($data->getKas());
+                $myKas = $data->getKas();
+                return 'Rp '.number_format($myKas);
             }
         ),
         array(
@@ -58,7 +59,8 @@ $('.search-form form').submit(function(){
                 'style'=>'text-align: right;'
             ),
             'value'=>function($data) {
-                return 'Rp '.number_format($data->getPiutang());
+                $myPiutang = $data->getPiutang();
+                return 'Rp '.number_format($myPiutang);
             }
         )
         /*
@@ -66,3 +68,21 @@ $('.search-form form').submit(function(){
         */
     ),
 )); ?>
+
+<div>
+<table style="width: 200px;">
+    <tr>
+        <td>Total kas</td>
+        <td style="text-align: right;">
+            Rp <?php echo number_format(Proyek::model()->getTotalKas()); ?>
+        </td>
+    </tr>
+    <tr>
+        <td>Total piutang</td>
+        <td style="text-align: right;">
+           Rp <?php echo number_format(Proyek::model()->getTotalPiutang()); ?>
+        </td>
+    </tr>
+</table>
+</div>
+

@@ -70,3 +70,14 @@ $('.search-form form').submit(function(){
 		),
 	),
 )); ?>
+
+<div>
+<table style="width: 300px;">
+    <tr>
+        <td>Total Harga Proyek</td>
+        <td style="text-align: right;">
+            Rp <?php echo number_format(Proyek::model()->getSumBiayaProyek()); ?>
+        </td>
+    </tr>
+</table>
+</div>

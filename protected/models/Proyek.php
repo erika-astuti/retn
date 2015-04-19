@@ -151,6 +151,41 @@ class Proyek extends CActiveRecord
 		}
    }
 
+   public function getTotalKas() 
+   {
+   		$cn =Yii::app()->db;
+   		$sql = "select sum(jumlah_transfer) as transfer from tbl_pembayaran";
+
+		$command = $cn->createCommand($sql);
+		$pembayaran = $command->queryRow();
+
+		if ($pembayaran['transfer'] == null) {
+			$pembayaran['transfer'] = 0;
+		}
+
+   		return $pembayaran['transfer'];
+   }
+
+   public function getSumBiayaProyek()
+   {
+   		$cn =Yii::app()->db;
+   		$sql = "select sum(biaya_proyek) as piutang from tbl_proyek";
+
+		$command = $cn->createCommand($sql);
+		$proyek = $command->queryRow();
+
+		if ($proyek['piutang'] == null) {
+			$proyek['piutang'] = 0;
+		}
+
+		return $proyek['piutang'];
+   }
+
+   public function getTotalPiutang()
+   {
+   		return $this->getSumBiayaProyek() - $this->getTotalKas(); 
+   }
+
    public function getKas() 
    {
    		$cn =Yii::app()->db;
