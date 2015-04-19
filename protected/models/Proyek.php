@@ -18,6 +18,9 @@
  */
 class Proyek extends CActiveRecord
 {
+
+	public $deliveryCode = '23';
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -128,6 +131,46 @@ class Proyek extends CActiveRecord
 		} else {
 			return $jumlah[0]['mysum'];
 		}
+   }
+
+   public function getTanggalSelesai()
+   {
+   		$cn =Yii::app()->db;
+   		$sql = "select waktu_terselesaikan from tbl_detail_proyek where 
+   			id_proyek='{$this->id_proyek}' and 
+   			status_pengerjaan like '%{$this->deliveryCode}%' 
+   			order by id_detail_proyek asc limit 1";
+
+		$command = $cn->createCommand($sql);
+		$tanggal = $command->queryAll();
+
+		if (count($tanggal) == 0) {
+			return '-';
+		} else {
+			return date('Y-m-d', strtotime($tanggal[0]['waktu_terselesaikan']));
+		}
+   }
+
+   public function getKas() 
+   {
+   		$cn =Yii::app()->db;
+   		$sql = "select sum(jumlah_transfer) as kas from tbl_pembayaran 
+			where id_detail_proyek in 
+			(select id_detail_proyek from tbl_detail_proyek where id_proyek='{$this->id_proyek}')";
+
+		$command = $cn->createCommand($sql);
+		$pembayaran = $command->queryRow();
+	
+		if ($pembayaran['kas'] == null) {
+			return 0;
+		} else {
+			return $pembayaran['kas'];
+		}
+   }
+
+   public function getPiutang()
+   {
+   		return $this->biaya_proyek - $this->getKas();
    }
 
 	/**

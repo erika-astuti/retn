@@ -35,9 +35,29 @@ $('.search-form form').submit(function(){
 	'columns'=>array(
 		// 'id_proyek',
 		'nama_proyek',
-		'tanggal_proyek',
 		'no_po',
-		'no_piutang',
+		array(
+			'name'=>'tanggal_proyek',
+			'header'=>'Tanggal Terima',
+			'filter'=>false
+		),
+		array(
+			'header'=>'Tanggal Selesai',
+			'value'=>function($data) {
+				return $data->getTanggalSelesai();
+			}
+		),
+		array(
+			'name'=>'biaya_proyek',
+			'header'=>'Harga Proyek',
+			'filter'=>false,
+			'htmlOptions'=>array(
+				'style'=>'text-align: right;'
+			),
+			'value'=>function($data) {
+				return 'Rp '.number_format($data->biaya_proyek);
+			}
+		),
 		array(
 			'name'=>'id_pelanggan',
 			'value'=>'$data->pelanggan->nama_pelanggan'

@@ -9,6 +9,7 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'Buat Baru Pembayaran', 'url'=>array('create')),
 	array('label'=>'Atur Pembayaran', 'url'=>array('admin')),
+    array('label'=>'Laporan Pembayaran', 'url'=>array('laporan')),
 );
 ?>
 

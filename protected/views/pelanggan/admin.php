@@ -33,9 +33,18 @@ $('.search-form form').submit(function(){
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
+		array(
+			'name'=>'id_pelanggan',
+			'header'=>'No',
+			'filter'=>false,
+			'value'=> function($data, $rowId) {
+				return $rowId + 1;
+			}
+		),
 		'nama_pelanggan',
-		'nama_institusi_pelanggan',
 		'alamat_pelanggan',
+		'nama_institusi_pelanggan',
+		'no_telp_pelanggan',
 		array(
 			'name'=>'tipe_pelanggan',
 			'value'=>array($model, 'getTipePelanggan'),

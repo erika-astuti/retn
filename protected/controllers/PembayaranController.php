@@ -36,7 +36,7 @@ class PembayaranController extends Controller
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
+				'actions'=>array('admin','delete', 'laporan'),
 				'users'=>array('@'),
 			),
 			array('deny',  // deny all users
@@ -141,6 +141,23 @@ class PembayaranController extends Controller
 		$this->render('admin',array(
 			'model'=>$model,
 		));
+	}
+
+	/**
+	* handling laporan pembayaran
+	*/
+
+	public function actionLaporan()
+	{
+		$model=new Proyek('search');
+		$model->unsetAttributes();  // clear any default values
+		if(isset($_GET['Proyek']))
+			$model->attributes=$_GET['Proyek'];
+
+		$this->render('laporan',array(
+			'model'=>$model,
+		));
+
 	}
 
 	/**
