@@ -12,7 +12,7 @@ $this->menu=array(
 	array('label'=>'Buat Baru Pelanggan', 'url'=>array('create')),
 	array('label'=>'Perbarui Pelanggan', 'url'=>array('update', 'id'=>$model->id_pelanggan)),
 	array('label'=>'Hapus Pelanggan', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id_pelanggan),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Atur Pelanggan', 'url'=>array('admin')),
+	array('label'=>'Laporan Pelanggan', 'url'=>array('admin')),
 );
 ?>
 

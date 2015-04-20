@@ -9,7 +9,7 @@ $this->breadcrumbs=array(
 
 $this->menu=array(
 	array('label'=>'Daftar Proyek', 'url'=>array('index')),
-	array('label'=>'Atur Proyek', 'url'=>array('admin')),
+	array('label'=>'Laporan Proyek', 'url'=>array('admin')),
 );
 ?>
 

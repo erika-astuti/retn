@@ -4,7 +4,7 @@
 
 $this->breadcrumbs=array(
 	'Proyek'=>array('index'),
-	'Atur',
+	'Laporan',
 );
 
 $this->menu=array(
@@ -26,7 +26,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Manajemen Data Proyek</h1>
+<h1>Laporan Proyek</h1>
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'proyek-grid',
@@ -39,13 +39,14 @@ $('.search-form form').submit(function(){
 		array(
 			'name'=>'tanggal_proyek',
 			'header'=>'Tanggal Terima',
-			'filter'=>false
+			'filter'=>false,
 		),
 		array(
 			'header'=>'Tanggal Selesai',
 			'value'=>function($data) {
 				return $data->getTanggalSelesai();
-			}
+			},
+			'footer'=>'Jumlah'
 		),
 		array(
 			'name'=>'biaya_proyek',
@@ -56,7 +57,8 @@ $('.search-form form').submit(function(){
 			),
 			'value'=>function($data) {
 				return 'Rp '.number_format($data->biaya_proyek);
-			}
+			}	,
+			'footer'=>'<div style="text-align: right;">Rp '.number_format(Proyek::model()->getSumBiayaProyek()).'</span>'
 		),
 		array(
 			'name'=>'id_pelanggan',
@@ -70,14 +72,3 @@ $('.search-form form').submit(function(){
 		),
 	),
 )); ?>
-
-<div>
-<table style="width: 300px;">
-    <tr>
-        <td>Total Harga Proyek</td>
-        <td style="text-align: right;">
-            Rp <?php echo number_format(Proyek::model()->getSumBiayaProyek()); ?>
-        </td>
-    </tr>
-</table>
-</div>

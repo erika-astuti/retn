@@ -12,7 +12,7 @@ $this->menu=array(
 	array('label'=>'Daftar Data Pelanggan', 'url'=>array('index')),
 	array('label'=>'Buat Data Pelanggan', 'url'=>array('create')),
 	array('label'=>'Lihat Pelanggan', 'url'=>array('view', 'id'=>$model->id_pelanggan)),
-	array('label'=>'Atur Pelanggan', 'url'=>array('admin')),
+	array('label'=>'Laporan Pelanggan', 'url'=>array('admin')),
 );
 ?>
 

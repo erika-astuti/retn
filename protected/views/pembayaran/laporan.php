@@ -41,7 +41,8 @@ $('.search-form form').submit(function(){
             'header'=>'Nama Pelanggan',
             'value'=>function($data) {
                 return $data->pelanggan->nama_pelanggan;
-            }   
+            },
+            'footer'=>'Jumlah'   
         ),
         array(
             'header'=>'Kas (Debet)',
@@ -51,7 +52,9 @@ $('.search-form form').submit(function(){
             'value'=>function($data) {
                 $myKas = $data->getKas();
                 return 'Rp '.number_format($myKas);
-            }
+            },
+            'footer'=>'<div style="text-align: right;">Rp '
+                .number_format(Proyek::model()->getTotalKas()).'</span>'
         ),
         array(
             'header'=>'Piutang (Kredit)',
@@ -59,9 +62,15 @@ $('.search-form form').submit(function(){
                 'style'=>'text-align: right;'
             ),
             'value'=>function($data) {
-                $myPiutang = $data->getPiutang();
-                return 'Rp '.number_format($myPiutang);
-            }
+                $myKas = $data->getKas();
+                return 'Rp '.number_format($myKas);
+            },
+            // 'value'=>function($data) {
+            //     $myPiutang = $data->getPiutang();
+            //     return 'Rp '.number_format($myPiutang);
+            // },
+            'footer'=>'<div style="text-align: right;">Rp '
+                .number_format(Proyek::model()->getTotalKas()).'</span>'
         )
         /*
         'biaya_proyek',
@@ -69,20 +78,4 @@ $('.search-form form').submit(function(){
     ),
 )); ?>
 
-<div>
-<table style="width: 200px;">
-    <tr>
-        <td>Total kas</td>
-        <td style="text-align: right;">
-            Rp <?php echo number_format(Proyek::model()->getTotalKas()); ?>
-        </td>
-    </tr>
-    <tr>
-        <td>Total piutang</td>
-        <td style="text-align: right;">
-           Rp <?php echo number_format(Proyek::model()->getTotalPiutang()); ?>
-        </td>
-    </tr>
-</table>
-</div>
 

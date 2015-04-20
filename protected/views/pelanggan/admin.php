@@ -4,7 +4,7 @@
 
 $this->breadcrumbs=array(
 	'Pelanggan'=>array('index'),
-	'Atur Data Pelanggan',
+	'Laporan',
 );
 
 $this->menu=array(
@@ -25,7 +25,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Atur Data Pelanggan</h1>
+<h1>Laporan Pelanggan</h1>
 
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
