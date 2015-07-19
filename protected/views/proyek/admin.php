@@ -3,13 +3,13 @@
 /* @var $model Proyek */
 
 $this->breadcrumbs=array(
-	'Proyeks'=>array('index'),
-	'Manage',
+	'Proyek'=>array('index'),
+	'Laporan',
 );
 
 $this->menu=array(
-	array('label'=>'List Proyek', 'url'=>array('index')),
-	array('label'=>'Create Proyek', 'url'=>array('create')),
+	array('label'=>'Daftar Proyek', 'url'=>array('index')),
+	array('label'=>'Buat Proyek', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -26,31 +26,44 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Manajemen Data Proyek</h1>
-
-<p>
-You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
-or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
-</p>
-
-<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
-<div class="search-form" style="display:none">
-<?php $this->renderPartial('_search',array(
-	'model'=>$model,
-)); ?>
-</div><!-- search-form -->
+<h1>Laporan Proyek</h1>
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'proyek-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
-		'id_proyek',
+		// 'id_proyek',
 		'nama_proyek',
-		'tanggal_proyek',
 		'no_po',
-		'no_piutang',
-		'id_pelanggan',
+		array(
+			'name'=>'tanggal_proyek',
+			'header'=>'Tanggal Terima',
+			'filter'=>false,
+		),
+		array(
+			'header'=>'Tanggal Selesai',
+			'value'=>function($data) {
+				return $data->getTanggalSelesai();
+			},
+			'footer'=>'Jumlah'
+		),
+		array(
+			'name'=>'biaya_proyek',
+			'header'=>'Harga Proyek',
+			'filter'=>false,
+			'htmlOptions'=>array(
+				'style'=>'text-align: right;'
+			),
+			'value'=>function($data) {
+				return 'Rp '.number_format($data->biaya_proyek);
+			}	,
+			'footer'=>'<div style="text-align: right;">Rp '.number_format(Proyek::model()->getSumBiayaProyek()).'</span>'
+		),
+		array(
+			'name'=>'id_pelanggan',
+			'value'=>'$data->pelanggan->nama_pelanggan'
+		),
 		/*
 		'biaya_proyek',
 		*/

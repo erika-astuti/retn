@@ -3,13 +3,14 @@
 /* @var $model Pembayaran */
 
 $this->breadcrumbs=array(
-	'Pembayarans'=>array('index'),
-	'Manage',
+	'Pembayaran'=>array('index'),
+	'Atur',
 );
 
 $this->menu=array(
-	array('label'=>'List Pembayaran', 'url'=>array('index')),
-	array('label'=>'Create Pembayaran', 'url'=>array('create')),
+	array('label'=>'Daftar Pembayaran', 'url'=>array('index')),
+	array('label'=>'Buat Pembayaran', 'url'=>array('create')),
+	array('label'=>'Laporan Pembayaran', 'url'=>array('laporan')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -26,30 +27,46 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Manage Pembayarans</h1>
-
-<p>
-You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
-or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
-</p>
-
-<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
-<div class="search-form" style="display:none">
-<?php $this->renderPartial('_search',array(
-	'model'=>$model,
-)); ?>
-</div><!-- search-form -->
+<h1>Atur Data Pembayaran</h1>
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'pembayaran-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
-		'id_pembayaran',
-		'id_detail_proyek',
-		'jumlah_transfer',
+		// 'id_pembayaran',
+		array(
+			'name'=>'id_bank',
+			'value'=>function($data) {
+				if (isset($data->bank)) {
+					return $data->bank->nama_bank;
+				} else {
+					return '-';
+				}
+			 },
+			'filter'=>CHtml::listData(
+				Bank::model()->findAll(),
+				'id_bank', 'nama_bank'
+			)
+		),
+		array(
+			'name'=>'id_detail_proyek',
+			'type'=>'raw',
+			'filter'=>CHtml::listData(
+				DetailProyek::model()->findAll(),
+				'id_detail_proyek', 'no_detail_invoice'
+			),
+			'value'=>'Pembayaran::model()->getProyekDetail($data);'
+		),
 		'waktu_transfer',
-		'id_bank',
+		array(
+			'name'=>'jumlah_transfer',
+			'filter'=>false,
+			'value'=>'\'Rp \'.number_format($data->jumlah_transfer)',
+			'htmlOptions'=>array(
+				'style'=>'text-align:right;'
+			)
+		),
 		array(
 			'class'=>'CButtonColumn',
 		),

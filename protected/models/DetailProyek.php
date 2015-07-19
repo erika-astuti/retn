@@ -9,7 +9,7 @@
  * @property string $no_detail_invoice
  * @property string $keterangan
  * @property string $waktu_terselesaikan
- * @property integer $status_pengerjaan
+ * @property string $status_pengerjaan
  * @property string $harga_detail
  * @property integer $id_proyek
  *
@@ -37,20 +37,103 @@ class DetailProyek extends CActiveRecord
 		return 'tbl_detail_proyek';
 	}
 
-	public function getAllDetailStatus() {
-		return array(
-			'Sketsa', 
-			'Proses Warna', 
-			'Render',  
-			'Selesai'
-		);
+   public $kategoriStatusPengerjaan = array(
+      'Pra Produksi',
+      'Produksi',
+      'Paska Produksi'
+   );
+
+   public $detailStatusPengerjaan = array(
+      array( //pra produksi
+         'naskah',
+         'desain karakter dan non karakter',
+         'storyboard',
+         'modeling karakter dan non karakter',
+         'rigging dan texturing',
+         'dubbing'
+      ),
+      array( //produksi
+         'animasi',
+         'lighting dan rendering'
+      ),
+      array( //paska produksi
+         'audio',
+         'editing',
+         'mastering',
+         'delivery'
+      ),
+   );
+
+	public function getAllKategoriStatus() {
+		return $this->kategoriStatusPengerjaan;
 	}
 
-	public function getDetailStatus() {
-		$st = $this->getAllDetailStatus();
+	public function beforeSave() {
+		$this->status_pengerjaan = implode(",", $this->status_pengerjaan);
 
-		return isset($st[$this->status_pengerjaan]) 
-			? $st[$this->status_pengerjaan] : '-';
+		return true;
+	}
+
+   public function beforeDelete() {
+      Pembayaran::model()->deleteAllByAttributes(array(
+         'id_detail_proyek'=>$this->id_detail_proyek
+      ));
+
+      return true;
+   }
+
+	public function getAllDetailStatus() {
+      $dtstat = array();
+
+      foreach($this->kategoriStatusPengerjaan as $catKey => $catVal) {
+         if(isset($this->detailStatusPengerjaan[$catKey])) {
+            foreach($this->detailStatusPengerjaan[$catKey] as $detKey => $detVal) {
+               $dtstat[$catVal][$catKey.$detKey] = $detVal;
+            }
+         }
+      }
+
+		return $dtstat;
+   }
+
+   public function getDetailStatus() {
+   	$dstat = explode(",", $this->status_pengerjaan);
+   	$fl = "";
+
+   	if(count($dstat) == 0) {
+   		$fl = "-";
+   		$buffer = array();
+   	} else {
+   		foreach ($dstat as $myStatus) {
+   			$buffer[] = $this->getFlagStatus($myStatus);
+   		}
+
+   		$fl = implode(" ", $buffer);
+   	}
+
+   	return $fl;
+
+   }
+
+	public function getFlagStatus($flagCode) {
+      if(strlen($flagCode) == 2) {
+         $outstr = '';
+         if(isset($this->kategoriStatusPengerjaan[$flagCode[0]]) ) {
+            $outstr .= $this->kategoriStatusPengerjaan[$flagCode[0]];
+            if(isset(
+                  $this->detailStatusPengerjaan[$flagCode[0]]
+                  [$flagCode[1]]
+			            )) {
+               $outstr .= ' -> '.$this->detailStatusPengerjaan[$flagCode[0]]
+                  [$flagCode[1]].'</br >';
+            }
+         }
+
+         return $outstr;
+
+      } else {
+         return '-';
+      }
 	}
 
 	/**
@@ -61,14 +144,16 @@ class DetailProyek extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('tanggal_jatuh_tempo, no_detail_invoice, keterangan, waktu_terselesaikan, status_pengerjaan, harga_detail, id_proyek', 'required'),
-			array('status_pengerjaan, id_proyek', 'numerical', 'integerOnly'=>true),
+			array('tanggal_jatuh_tempo, no_detail_invoice, keterangan, 
+				waktu_terselesaikan, status_pengerjaan, harga_detail, id_proyek', 'required'),
+			array('id_proyek', 'numerical', 'integerOnly'=>true),
 			array('no_detail_invoice', 'length', 'max'=>128),
 			array('keterangan', 'length', 'max'=>512),
 			array('harga_detail', 'length', 'max'=>20),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_detail_proyek, tanggal_jatuh_tempo, no_detail_invoice, keterangan, waktu_terselesaikan, status_pengerjaan, harga_detail, id_proyek', 'safe', 'on'=>'search'),
+			array('id_detail_proyek, tanggal_jatuh_tempo, no_detail_invoice, 
+				keterangan, waktu_terselesaikan, status_pengerjaan, harga_detail, id_proyek', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -104,7 +189,8 @@ class DetailProyek extends CActiveRecord
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
-	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
+	 * @return CActiveDataProvider the data provider that can 
+	 *	return the models based on the search/filter conditions.
 	 */
 	public function search()
 	{

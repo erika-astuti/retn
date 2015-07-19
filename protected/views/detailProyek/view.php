@@ -8,15 +8,20 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	//array('label'=>'List DetailProyek', 'url'=>array('index')),
-	array('label'=>'Entri Detail Proyek Baru', 'url'=>array('create')),
-	array('label'=>'Update', 'url'=>array('update', 'id'=>$model->id_detail_proyek)),
-	array('label'=>'Hapus', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id_detail_proyek),'confirm'=>'Are you sure you want to delete this item?')),
-	//array('label'=>'Manage DetailProyek', 'url'=>array('admin')),
+	//array('label'=>'Daftar Detail Proyek', 'url'=>array('index')),
+	array('label'=>'Entri Detail Proyek Baru', 'url'=>array('detailProyek/create/proyekid/'.$model->id_proyek)),
+	array('label'=>'Update', 'url'=>array('update', 
+		'id'=>$model->id_detail_proyek,
+		'proyekid'=>$model->id_proyek
+	)),
+	array('label'=>'Hapus', 'url'=>'#', 'linkOptions'=>array(
+		'submit'=>array('delete',
+			'id'=>$model->id_detail_proyek),'confirm'=>'Are you sure you want to delete this item?')),
+	//array('label'=>'Atur Detail Proyek', 'url'=>array('admin')),
 );
 ?>
 
-<h1>View Detail Proyek <?php echo $model->keterangan; ?></h1>
+<h1>Data Detail Proyek <?php echo $model->keterangan; ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
@@ -29,6 +34,7 @@ $this->menu=array(
 		array(
 			'header'=>'Status',
 			'name'=>'status_pengerjaan',
+			'type'=>'raw',
 			'value'=>$model->getDetailStatus()
 		),
 		'harga_detail',

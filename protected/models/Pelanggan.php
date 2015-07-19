@@ -46,7 +46,9 @@ class Pelanggan extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nama_pelanggan, nama_institusi_pelanggan, alamat_pelanggan, no_rekening, tipe_pelanggan, nama_bank, no_telp_pelanggan, fax_pelanggan, email_pelanggan', 'required'),
+			array('nama_pelanggan, nama_institusi_pelanggan, alamat_pelanggan, 
+				no_rekening, tipe_pelanggan, nama_bank, no_telp_pelanggan, 
+				fax_pelanggan, email_pelanggan', 'required'),
 			array('nama_pelanggan', 'length', 'max'=>255),
 			array('nama_institusi_pelanggan, nama_bank, email_pelanggan', 'length', 'max'=>128),
 			array('alamat_pelanggan', 'length', 'max'=>512),
@@ -54,7 +56,9 @@ class Pelanggan extends CActiveRecord
 			array('no_rekening, no_telp_pelanggan, fax_pelanggan', 'length', 'max'=>32),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_pelanggan, nama_pelanggan, nama_institusi_pelanggan, alamat_pelanggan, tipe_pelanggan, no_rekening, nama_bank, no_telp_pelanggan, fax_pelanggan, email_pelanggan', 'safe', 'on'=>'search'),
+			array('id_pelanggan, nama_pelanggan, nama_institusi_pelanggan, 
+				alamat_pelanggan, tipe_pelanggan, no_rekening, nama_bank, no_telp_pelanggan, 
+				fax_pelanggan, email_pelanggan', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -145,7 +149,8 @@ class Pelanggan extends CActiveRecord
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
-	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
+	 * @return CActiveDataProvider the data provider that can return 
+	 *  the models based on the search/filter conditions.
 	 */
 	public function search()
 	{

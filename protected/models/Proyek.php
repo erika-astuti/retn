@@ -18,6 +18,9 @@
  */
 class Proyek extends CActiveRecord
 {
+
+	public $deliveryCode = '23';
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -102,9 +105,113 @@ class Proyek extends CActiveRecord
 		);
 	}
 
+   public function beforeDelete() {
+      DetailProyek::model()->deleteAllByAttributes(array(
+         'id_proyek'=>$this->id_proyek
+      ));
+
+      return true;
+   }
+
+   public function getJumlahTerbayar() 
+   {
+		$connection = Yii::app()->db;
+		$sql = "select sum(jumlah_transfer) as mysum from tbl_pembayaran 
+		where id_detail_proyek in (
+		select id_detail_proyek from 
+		    tbl_detail_proyek where 
+		    id_proyek='{$this->id_proyek}'
+		)";
+
+		$command = $connection->createCommand($sql);
+		$jumlah = $command->queryAll();
+
+		if($jumlah[0]['mysum'] == NULL) {
+			return 0;
+		} else {
+			return $jumlah[0]['mysum'];
+		}
+   }
+
+   public function getTanggalSelesai()
+   {
+   		$cn =Yii::app()->db;
+   		$sql = "select waktu_terselesaikan from tbl_detail_proyek where 
+   			id_proyek='{$this->id_proyek}' and 
+   			status_pengerjaan like '%{$this->deliveryCode}%' 
+   			order by id_detail_proyek asc limit 1";
+
+		$command = $cn->createCommand($sql);
+		$tanggal = $command->queryAll();
+
+		if (count($tanggal) == 0) {
+			return '-';
+		} else {
+			return date('Y-m-d', strtotime($tanggal[0]['waktu_terselesaikan']));
+		}
+   }
+
+   public function getTotalKas() 
+   {
+   		$cn =Yii::app()->db;
+   		$sql = "select sum(jumlah_transfer) as transfer from tbl_pembayaran";
+
+		$command = $cn->createCommand($sql);
+		$pembayaran = $command->queryRow();
+
+		if ($pembayaran['transfer'] == null) {
+			$pembayaran['transfer'] = 0;
+		}
+
+   		return $pembayaran['transfer'];
+   }
+
+   public function getSumBiayaProyek()
+   {
+   		$cn =Yii::app()->db;
+   		$sql = "select sum(biaya_proyek) as piutang from tbl_proyek";
+
+		$command = $cn->createCommand($sql);
+		$proyek = $command->queryRow();
+
+		if ($proyek['piutang'] == null) {
+			$proyek['piutang'] = 0;
+		}
+
+		return $proyek['piutang'];
+   }
+
+   public function getTotalPiutang()
+   {
+   		return $this->getSumBiayaProyek() - $this->getTotalKas(); 
+   }
+
+   public function getKas() 
+   {
+   		$cn =Yii::app()->db;
+   		$sql = "select sum(jumlah_transfer) as kas from tbl_pembayaran 
+			where id_detail_proyek in 
+			(select id_detail_proyek from tbl_detail_proyek where id_proyek='{$this->id_proyek}')";
+
+		$command = $cn->createCommand($sql);
+		$pembayaran = $command->queryRow();
+	
+		if ($pembayaran['kas'] == null) {
+			return 0;
+		} else {
+			return $pembayaran['kas'];
+		}
+   }
+
+   public function getPiutang()
+   {
+   		return $this->biaya_proyek - $this->getKas();
+   }
+
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
-	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
+	 * @return CActiveDataProvider the data provider that can return 
+	 *		the models based on the search/filter conditions.
 	 */
 	public function search()
 	{

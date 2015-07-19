@@ -3,13 +3,13 @@
 /* @var $model Bank */
 
 $this->breadcrumbs=array(
-	'Banks'=>array('index'),
-	'Create',
+	'Bank'=>array('index'),
+	'Entri Baru',
 );
 
 $this->menu=array(
-	array('label'=>'List Bank', 'url'=>array('index')),
-	array('label'=>'Manage Bank', 'url'=>array('admin')),
+	array('label'=>'List Data Bank', 'url'=>array('index')),
+	array('label'=>'Atur Bank', 'url'=>array('admin')),
 );
 ?>
 

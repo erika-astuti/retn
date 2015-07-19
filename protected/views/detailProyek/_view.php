@@ -28,7 +28,7 @@
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('status_pengerjaan')); ?>:</b>
-	<?php echo CHtml::encode($data->getDetailStatus()); ?>
+	<?php echo $data->getDetailStatus(); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('harga_detail')); ?>:</b>

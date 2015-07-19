@@ -3,19 +3,16 @@
 /* @var $model Bank */
 
 $this->breadcrumbs=array(
-	'Banks'=>array('index'),
-	$model->id_bank=>array('view','id'=>$model->id_bank),
-	'Update',
+	'Bank'=>array('index'),
+	$model->nama_bank=>array('view','id'=>$model->id_bank),
+	'Perbarui Data',
 );
 
 $this->menu=array(
 	array('label'=>'List Bank', 'url'=>array('index')),
-	array('label'=>'Create Bank', 'url'=>array('create')),
-	array('label'=>'View Bank', 'url'=>array('view', 'id'=>$model->id_bank)),
-	array('label'=>'Manage Bank', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Update Bank <?php echo $model->id_bank; ?></h1>
+<h1>Perbarui Data Bank "<?php echo $model->nama_bank; ?>"</h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

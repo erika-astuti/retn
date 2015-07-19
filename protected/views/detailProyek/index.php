@@ -8,7 +8,7 @@ $this->breadcrumbs=array(
 
 $this->menu=array(
 	array('label'=>'Entri Detail Proyek Baru', 'url'=>array('create')),
-	//array('label'=>'Manage DetailProyek', 'url'=>array('admin')),
+	//array('label'=>'Atur Detail Proyek', 'url'=>array('admin')),
 );
 ?>
 

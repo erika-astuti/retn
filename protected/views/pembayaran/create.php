@@ -3,16 +3,17 @@
 /* @var $model Pembayaran */
 
 $this->breadcrumbs=array(
-	'Pembayarans'=>array('index'),
-	'Create',
+	'Pembayaran'=>array('index'),
+	'Buat Baru',
 );
 
 $this->menu=array(
-	array('label'=>'List Pembayaran', 'url'=>array('index')),
-	array('label'=>'Manage Pembayaran', 'url'=>array('admin')),
+	array('label'=>'Daftar Pembayaran', 'url'=>array('index')),
+	array('label'=>'Atur Pembayaran', 'url'=>array('admin')),
+    array('label'=>'Laporan Pembayaran', 'url'=>array('laporan')),
 );
 ?>
 
-<h1>Create Pembayaran</h1>
+<h1>Buat Pembayaran</h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

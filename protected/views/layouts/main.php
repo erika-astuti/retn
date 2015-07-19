@@ -29,22 +29,39 @@
 
 <div class="container" id="page">
 
+<div id="header" class="container">
+	<div class="logo span-3">
+      <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/<?php echo Yii::app()->params['headerImage']; ?>"
+      	 width="85em;" height="85em;" alt=""/>
+	</div>
+	<div class="logo text span-17">
+		<?php echo CHtml::encode(Yii::app()->name); ?> <br />
+		<small>PT STUDIO KASATMATA</small>
+	</div>
+</div>
+
+	<?php /* 
 	<div id="header">
 		<div id="logo">
-		<i class="fa fa-university fa-1x"></i> 
-		<?php echo CHtml::encode(Yii::app()->name); ?></div>
+      <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/<?php echo Yii::app()->params['headerImage']; ?>" width="80em;" height="80em;" alt=""/>
+		<?php echo CHtml::encode(Yii::app()->name); ?> <br />
+		PT STUDIO KASATMATA
+		</div>
 	</div><!-- header -->
+	<?php */ ?>
 
 	<div id="mainmenu">
 		<?php $this->widget('zii.widgets.CMenu',array(
+			'encodeLabel'=>false,
 			'items'=>array(
-				array('label'=>'Home', 'url'=>array('/site/index')),
+				array('label'=>'<i class="fa fa-home"></i> Home', 'url'=>array('/site/index')),
 				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
-				array('label'=>'Proyek', 'url'=>array('/proyek'), 'visible'=>!Yii::app()->user->isGuest),
-				array('label'=>'Pembayaran', 'url'=>array('/pembayaran'), 'visible'=>!Yii::app()->user->isGuest),
-				array('label'=>'Pelanggan', 'url'=>array('/pelanggan'), 'visible'=>!Yii::app()->user->isGuest),
-				array('label'=>'Bank', 'url'=>array('/bank'), 'visible'=>!Yii::app()->user->isGuest),
-				array('label'=>'User', 'url'=>array('/user'), 'visible'=>!Yii::app()->user->isGuest),
+				array('label'=>'<i class="fa fa-cubes"></i> Proyek', 'url'=>array('/proyek/admin'), 'visible'=>!Yii::app()->user->isGuest),
+				array('label'=>'<i class="fa fa-money"></i> Pembayaran', 'url'=>array('/pembayaran/admin'), 'visible'=>!Yii::app()->user->isGuest),
+				array('label'=>'<i class="fa fa-file-powerpoint-o"></i> Laporan Piutang', 'url'=>array('/proyek/piutang'), 'visible'=>!Yii::app()->user->isGuest),
+				array('label'=>'<i class="fa fa-male"></i> Pelanggan', 'url'=>array('/pelanggan/admin'), 'visible'=>!Yii::app()->user->isGuest),
+				array('label'=>'<i class="fa fa-bank"></i> Bank', 'url'=>array('/bank/admin'), 'visible'=>!Yii::app()->user->isGuest),
+				array('label'=>'<i class="fa fa-users"></i> User', 'url'=>array('/user/admin'), 'visible'=>!Yii::app()->user->isGuest),
 				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 			),
 		)); ?>
@@ -60,7 +77,7 @@
 	<div class="clear"></div>
 
 	<div id="footer">
-		Copyright &copy; <?php echo date('Y'); ?> by retn ndut.<br/>
+		Copyright &copy; <?php echo date('Y'); ?> by Retno Arini.<br/>
 		All Rights Reserved.<br/>
 	</div><!-- footer -->
 

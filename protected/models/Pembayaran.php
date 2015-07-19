@@ -77,6 +77,17 @@ class Pembayaran extends CActiveRecord
 		);
 	}
 
+	public function getProyekDetail($data) 
+	{
+		if (isset($data->idDetailProyek)) {
+			return "<b>{$data->idDetailProyek->idProyek->nama_proyek}</b><br />"
+				."{$data->idDetailProyek->no_detail_invoice}";
+		
+		} else {
+			return '-';
+		}
+	}
+
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.

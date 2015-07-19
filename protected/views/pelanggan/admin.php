@@ -3,13 +3,12 @@
 /* @var $model Pelanggan */
 
 $this->breadcrumbs=array(
-	'Pelanggans'=>array('index'),
-	'Manage',
+	'Pelanggan'=>array('index'),
+	'Laporan',
 );
 
 $this->menu=array(
-	array('label'=>'List Pelanggan', 'url'=>array('index')),
-	array('label'=>'Create Pelanggan', 'url'=>array('create')),
+	array('label'=>'Entri Pelanggan Baru', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -26,7 +25,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Manage Data Pelanggan</h1>
+<h1>Laporan Pelanggan</h1>
 
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
@@ -34,9 +33,18 @@ $('.search-form form').submit(function(){
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
+		array(
+			'name'=>'id_pelanggan',
+			'header'=>'No',
+			'filter'=>false,
+			'value'=> function($data, $rowId) {
+				return $rowId + 1;
+			}
+		),
 		'nama_pelanggan',
-		'nama_institusi_pelanggan',
 		'alamat_pelanggan',
+		'nama_institusi_pelanggan',
+		'no_telp_pelanggan',
 		array(
 			'name'=>'tipe_pelanggan',
 			'value'=>array($model, 'getTipePelanggan'),

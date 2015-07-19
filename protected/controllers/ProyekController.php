@@ -7,7 +7,6 @@ class ProyekController extends Controller
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
 	public $layout='//layouts/column2';
-
 	/**
 	 * @return array action filters
 	 */
@@ -32,7 +31,7 @@ class ProyekController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update', 'cetakPo', 'cetakInvoice', 'piutang', 'piutangdetail'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -116,7 +115,8 @@ class ProyekController extends Controller
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+			$this->redirect(isset($_POST['returnUrl']) 
+				? $_POST['returnUrl'] : array('admin'));
 	}
 
 	/**
@@ -129,6 +129,78 @@ class ProyekController extends Controller
 			'dataProvider'=>$dataProvider,
 		));
 	}
+
+   public function actionCetakPo($id) {
+   	$retrievedProyek = Proyek::model()->findByPk($id);
+
+   	if($retrievedProyek) {
+   		$pelanggan = $retrievedProyek->pelanggan;
+
+	      $this->layout = '//layouts/print';
+			$this->render('print-po',array(
+				'proyek'=>$retrievedProyek,
+				'pelanggan'=>$pelanggan
+			));
+   	} else {
+			throw new CHttpException(404, 'Invalid Proyek ID');
+   	}
+   }
+
+   public function actionCetakInvoice($id) 
+   {
+   	$retrievedDetailProyek = DetailProyek::model()->findByPk($id);
+
+   	if($retrievedDetailProyek) {
+   		$proyek = $retrievedDetailProyek->idProyek;
+   		$pelanggan = $proyek->pelanggan;
+
+	      $this->layout = '//layouts/print';
+			$this->render('print-invoice',array(
+				'detailproyek'=>$retrievedDetailProyek,
+				'proyek'=>$proyek,
+				'pelanggan'=>$pelanggan
+			));
+
+   	} else {
+			throw new CHttpException(404, 'Invalid Detail Proyek ID');
+   	}
+   }
+
+   public function actionPiutang() 
+   {
+		$baseScriptUrl = Yii::app()->getAssetManager()->publish(
+			Yii::getPathOfAlias('zii.widgets.assets')
+		);
+		Yii::app()->clientScript->registerCssFile(
+			$baseScriptUrl.'/gridview/styles.css'
+		);    	
+
+		$model = Proyek::model()->findAll();
+
+		$this->render('piutang',array(
+			'model'=>$model,
+		));
+   }
+
+   public function actionPiutangdetail($id) 
+   {
+		$baseScriptUrl = Yii::app()->getAssetManager()->publish(
+			Yii::getPathOfAlias('zii.widgets.assets')
+		);
+		Yii::app()->clientScript->registerCssFile(
+			$baseScriptUrl.'/gridview/styles.css'
+		);    	
+
+		$proyek = Proyek::model()->findByPk($id);
+
+		if(!$proyek) {
+			throw new CHttpException(404, "Id proyek anda tidak valid");
+	 	} else {
+			$this->render('piutangdetail',array(
+				'proyek'=>$proyek,
+			));
+	 	}
+   }
 
 	/**
 	 * Manages all models.

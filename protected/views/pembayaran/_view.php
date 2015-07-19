@@ -11,7 +11,7 @@
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('jumlah_transfer')); ?>:</b>
-	<?php echo CHtml::encode($data->jumlah_transfer); ?>
+	Rp <?php echo CHtml::encode(number_format($data->jumlah_transfer)); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('waktu_transfer')); ?>:</b>
